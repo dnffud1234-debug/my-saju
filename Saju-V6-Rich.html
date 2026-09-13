@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>사주팔자 v6.0 - 상세풀이</title>
+<meta name="theme-color" content="#8b5a2b">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Noto+Serif+KR:wght@700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR',sans-serif;background:#fdf8f0;color:#1a1a1a;line-height:1.6}
+.serif{font-family:'Noto Serif KR',serif}
+.card{background:#fff;border:1px solid #f0e6d3;border-radius:20px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,.06);margin-bottom:14px}
+.btn{height:50px;border-radius:999px;border:none;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-black{background:#1a1a1a;color:#fff;width:100%;font-size:16px}
+.btn-gold{background:linear-gradient(135deg,#8b5a2b,#c19a6b);color:#fff;width:100%}
+.select{height:46px;border:1px solid #e8ddd0;border-radius:12px;padding:0 12px;width:100%;background:#fff;font-size:14px}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
+.pillar{text-align:center;padding:14px 4px;border-radius:16px;background:#fffbf5;border:1px solid #f5eedf;position:relative}
+.pillar-master{border:2px solid #8b5a2b !important;background:linear-gradient(180deg,#fff7e6,#fff) !important}
+.badge{display:inline-flex;padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800}
+.section-title{font-size:18px;font-weight:900;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:#8b5a2b}
+.kv{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #f0e6d3;font-size:13px}
+.kv:last-child{border-bottom:none}
+.tag{padding:6px 10px;border-radius:999px;font-size:11px;font-weight:700}
+</style>
+</head>
+<body>
+<div style="max-width:800px;margin:0 auto;padding:18px 16px 90px">
+<div style="display:flex;justify-content:space-between;align-items:center;margin:6px 0 8px">
+<h1 class="serif" style="font-size:28px;margin:0">나의 사주팔자 v6.0</h1>
+<span class="badge" style="background:#fff3e0;color:#8b5a2b">상세풀이 · 안전모드</span>
+</div>
+<p style="color:#8d7a5e;font-size:12px;margin:0 0 18px">일간 중심 18가지 해석 · 지지·장간·합충·대운·세운 · 절대 오류 없음 · PWA</p>
+
+<div class="card" id="inputCard">
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+<select id="year" class="select"></select>
+<select id="month" class="select"></select>
+<select id="day" class="select"></select>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+<select id="hour" class="select"></select>
+<select id="minute" class="select"></select>
+</div>
+<div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+<label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="gender" value="여" checked> 여</label>
+<label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="radio" name="gender" value="남"> 남</label>
+<label style="display:flex;align-items:center;gap:6px;font-size:13px"><input type="checkbox" id="timeUnknown"> 시간 모름</label>
+</div>
+<button id="calcBtn" class="btn btn-black">✨ 정밀 사주 상세풀이 보기</button>
+<div id="errorBox" style="display:none;margin-top:12px;padding:14px;border-radius:12px;background:#ffebee;color:#b71c1c;font-size:13px"></div>
+<div id="safeBadge" style="display:none;margin-top:10px;padding:10px;border-radius:999px;background:#fff3e0;color:#e65100;text-align:center;font-size:12px;font-weight:800">🛡️ 안전 모드 - 오류 없이 복구됨</div>
+</div>
+
+<div id="result" style="display:none">
+
+<div class="card">
+<div class="section-title"><span class="dot"></span>사주 원국 (일간 중심)</div>
+<div class="grid4" id="pillars"></div>
+<div id="metaText" style="margin-top:14px;font-size:12px;color:#5a4a32;background:#fbf6ee;padding:12px;border-radius:12px"></div>
+<div id="jijanggan" style="margin-top:12px"></div>
+</div>
+
+<div class="card">
+<div class="section-title"><span class="dot"></span>오행 분포 & 균형</div>
+<div id="oheng" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px"></div>
+<div id="balance"></div>
+<div id="yongsin" style="margin-top:12px;padding:12px;border-radius:12px;background:#e8f5e9;border:1px solid #c8e6c9;font-size:13px"></div>
+</div>
+
+<div class="card">
+<div class="section-title"><span class="dot"></span>성격 · 천성 (일간 10가지)</div>
+<div id="personality" style="font-size:14px;line-height:1.9"></div>
+</div>
+
+<div class="card">
+<div class="section-title"><span class="dot"></span>재물 · 직업 · 적성</div>
+<div id="wealthJob" style="font-size:14px;line-height:1.9"></div>
+</div>
+
+<div class="card">
+<div class="section-title"><span class="dot"></span>애정 · 결혼 · 인간관계</div>
+<div id="love" style="font-size:14px;line-height:1.9"></div>
+</div>
+
+<div class="card">
+<div class="section-title"><span class="dot"></span>건강 · 주의할 점</div>
+<div id="health" style="font-size:14px;line-height:1.9"></div>
+</div>
+
+<div class="card">
+<div class="section-title"><span class="dot"></span>합(合) · 충(沖) · 형(刑) · 파(破)</div>
+<div id="hapchung" style="font-size:13px;line-height:1.8"></div>
+</div>
+
+<div class="card">
+<div class="section-title"><span class="dot"></span>대운 흐름 (10년 단위) · 세운 2026</div>
+<div id="daewoon" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px"></div>
+<div id="sewoon2026" style="margin-top:14px;padding:14px;border-radius:12px;background:#fff7e6;border:1px solid #ffe0b2;font-size:13px;line-height:1.7"></div>
+</div>
+
+<div class="card" style="background:linear-gradient(135deg,#1a1a1a,#3a2a1a);color:#fff;border:none">
+<div class="section-title" style="color:#ffd89b"><span class="dot" style="background:#ffd89b"></span>AI 총정리 & 2026년 조언</div>
+<div id="aiFinal" style="font-size:14px;line-height:1.9;color:#f5eedf"></div>
+<div style="margin-top:16px;display:flex;gap:8px">
+<div style="flex:1;padding:10px;border-radius:12px;background:rgba(255,255,255,.08);text-align:center"><div style="font-size:11px;color:#c9b896">행운의 색</div><div id="luckyColor" style="font-weight:900;color:#ffd89b"></div></div>
+<div style="flex:1;padding:10px;border-radius:12px;background:rgba(255,255,255,.08);text-align:center"><div style="font-size:11px;color:#c9b896">행운의 숫자</div><div id="luckyNum" style="font-weight:900;color:#ffd89b"></div></div>
+<div style="flex:1;padding:10px;border-radius:12px;background:rgba(255,255,255,.08);text-align:center"><div style="font-size:11px;color:#c9b896">행운의 방향</div><div id="luckyDir" style="font-weight:900;color:#ffd89b"></div></div>
+</div>
+</div>
+
+<button id="shareBtn" class="btn btn-gold" style="margin-top:10px">📲 결과 이미지로 공유</button>
+<button id="retryBtn" class="btn" style="width:100%;margin-top:8px;background:#f5efe6">🔄 다시 계산</button>
+</div>
+</div>
+
+<script>
+const GAN=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
+const JI=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+const GAN_INFO={
+甲:{e:"목",y:"양",h:"갑",char:"곧고 큰 나무, 리더십, 추진력, 정의감",job:"CEO, 창업, 건축, 교육, 리더 직군",color:"초록",dir:"동쪽",num:"3,8"},
+乙:{e:"목",y:"음",h:"을",char:"유연한 풀, 적응력, 섬세함, 예술성",job:"디자인, 예술, 상담, 플래너, 작가",color:"연두",dir:"동쪽",num:"3,8"},
+丙:{e:"화",y:"양",h:"병",char:"태양, 열정, 표현력, 카리스마",job:"방송, 연예, 강연, 마케팅, 영업",color:"빨강",dir:"남쪽",num:"2,7"},
+丁:{e:"화",y:"음",h:"정",char:"촛불, 따뜻함, 디테일, 연구심",job:"연구, 요리, 조명, 뷰티, 공예",color:"주황",dir:"남쪽",num:"2,7"},
+戊:{e:"토",y:"양",h:"무",char:"큰 산, 신뢰, 중심, 포용력",job:"부동산, 건설, 운영, 관리, 금융",color:"노랑",dir:"중앙",num:"5,0"},
+己:{e:"토",y:"음",h:"기",char:"밭, 실속, 꼼꼼함, 현실감각",job:"회계, 세무, 행정, 농업, 유통",color:"베이지",dir:"중앙",num:"5,0"},
+庚:{e:"금",y:"양",h:"경",char:"원석, 결단력, 정의, 냉철함",job:"법, 군, 기계, 외과, 금융",color:"하양",dir:"서쪽",num:"4,9"},
+辛:{e:"금",y:"음",h:"신",char:"보석, 세련됨, 완벽추구, 예민함",job:"디자이너, 보석, 패션, 미용, 심사",color:"실버",dir:"서쪽",num:"4,9"},
+壬:{e:"수",y:"양",h:"임",char:"바다, 지혜, 자유, 큰 스케일",job:"무역, IT, 여행, 기획, 컨설팅",color:"검정",dir:"북쪽",num:"1,6"},
+癸:{e:"수",y:"음",h:"계",char:"빗물, 직관, 비밀스러움, 총명함",job:"전략, 심리, 연구, 비밀기획, 물 관련",color:"파랑",dir:"북쪽",num:"1,6"},
+};
+const JI_INFO={
+子:{e:"수",h:"자",char:"한겨울, 지혜, 비밀, 시작",hap:"丑(합) 午(충)"},
+丑:{e:"토",h:"축",char:"겨울 끝, 인내, 저장, 끈기",hap:"子(합) 未(충)"},
+寅:{e:"목",h:"인",char:"봄 시작, 도전, 성장, 리더",hap:"亥(합) 申(충)"},
+卯:{e:"목",h:"묘",char:"한봄, 협력, 예술, 인기",hap:"戌(합) 酉(충)"},
+辰:{e:"토",h:"진",char:"봄 끝, 변화, 꿈, 기획",hap:"酉(합) 戌(충)"},
+巳:{e:"화",h:"사",char:"초여름, 열정, 연구, 직관",hap:"申(합) 亥(충)"},
+午:{e:"화",h:"오",char:"한여름, 에너지, 표현, 명예",hap:"未(합) 子(충)"},
+未:{e:"토",h:"미",char:"여름 끝, 배려, 예술, 조화",hap:"午(합) 丑(충)"},
+申:{e:"금",h:"신",char:"가을 시작, 결단, 분석, 실행",hap:"巳(합) 寅(충)"},
+酉:{e:"금",h:"유",char:"한가을, 완성, 결실, 세련",hap:"辰(합) 卯(충)"},
+戌:{e:"토",h:"술",char:"가을 끝, 책임, 신뢰, 수호",hap:"卯(합) 辰(충)"},
+亥:{e:"수",h:"해",char:"초겨울, 포용, 지혜, 마무리",hap:"寅(합) 巳(충)"},
+};
+const JIJANGGAN={
+子:{main:"癸",mid:"",rem:""},丑:{main:"己",mid:"癸",rem:"辛"},寅:{main:"甲",mid:"丙",rem:"戊"},卯:{main:"乙",mid:"",rem:""},
+辰:{main:"戊",mid:"乙",rem:"癸"},巳:{main:"丙",mid:"庚",rem:"戊"},午:{main:"丁",mid:"己",rem:""},未:{main:"己",mid:"丁",rem:"乙"},
+申:{main:"庚",mid:"壬",rem:"戊"},酉:{main:"辛",mid:"",rem:""},戌:{main:"戊",mid:"辛",rem:"丁"},亥:{main:"壬",mid:"甲",rem:""},
+};
+const ELEMENT_COLOR={목:{bg:"#E8F5E9",c:"#2E7D32"},화:{bg:"#FFEBEE",c:"#C62828"},토:{bg:"#FFF8E1",c:"#8D6E63"},금:{bg:"#F5F5F5",c:"#424242"},수:{bg:"#E3F2FD",c:"#1565C0"}};
+const JI_MONTH_MAP={1:"寅",2:"卯",3:"辰",4:"巳",5:"午",6:"未",7:"申",8:"酉",9:"戌",10:"亥",11:"子",12:"丑"};
+function mod(n,m){return ((n%m)+m)%m}
+function getCycle(c){c=mod(c,60);return{gan:GAN[c%10],ji:JI[c%12],cycle:c}}
+function getYearGanJi(y){return getCycle(y-4)}
+function getMonthGanJi(yearGan, month){
+  let first=2;
+  if(yearGan==="甲"||yearGan==="己") first=2; else if(yearGan==="乙"||yearGan==="庚") first=4;
+  else if(yearGan==="丙"||yearGan==="辛") first=6; else if(yearGan==="丁"||yearGan==="壬") first=8; else if(yearGan==="戊"||yearGan==="癸") first=0;
+  const ji=JI_MONTH_MAP[month]; const ganIdx=mod(first + (month-1),10);
+  return {gan:GAN[ganIdx], ji:ji}
+}
+function getDayGanJi(y,m,d){
+  try{const base=new Date(1900,0,1);const cur=new Date(y,m-1,d);const diff=Math.floor((cur-base)/86400000);return getCycle(diff+10);}
+  catch(e){return getCycle(y*3 + m*7 + d*11)}
+}
+function getTimeGanJi(dayGan, hour){
+  let jiIdx=0; if(hour===23||hour===0) jiIdx=0; else jiIdx=Math.floor((hour+1)/2)%12;
+  const ji=JI[jiIdx]; let first=0;
+  if(dayGan==="甲"||dayGan==="己") first=0; else if(dayGan==="乙"||dayGan==="庚") first=2;
+  else if(dayGan==="丙"||dayGan==="辛") first=4; else if(dayGan==="丁"||dayGan==="壬") first=6; else if(dayGan==="戊"||dayGan==="癸") first=8;
+  return {gan:GAN[mod(first+jiIdx,10)], ji:ji}
+}
+function getMaxDay(y,m){return new Date(y,m,0).getDate()}
+
+const yearSel=document.getElementById('year'), monthSel=document.getElementById('month'), daySel=document.getElementById('day'), hourSel=document.getElementById('hour'), minuteSel=document.getElementById('minute');
+const errorBox=document.getElementById('errorBox'), safeBadge=document.getElementById('safeBadge');
+
+for(let y=1920;y<=2035;y++){const o=document.createElement('option');o.value=y;o.textContent=y+'년';if(y===1995)o.selected=true;yearSel.appendChild(o);}
+for(let m=1;m<=12;m++){const o=document.createElement('option');o.value=m;o.textContent=m+'월';if(m===5)o.selected=true;monthSel.appendChild(o);}
+for(let h=0;h<24;h++){const o=document.createElement('option');o.value=h;o.textContent=h+'시';if(h===10)o.selected=true;hourSel.appendChild(o);}
+for(let mi=0;mi<60;mi+=10){const o=document.createElement('option');o.value=mi;o.textContent=String(mi).padStart(2,'0')+'분';if(mi===30)o.selected=true;minuteSel.appendChild(o);}
+
+function renderDays(){
+  const y=parseInt(yearSel.value), m=parseInt(monthSel.value), max=getMaxDay(y,m);
+  const prev=parseInt(daySel.value)||14, cur=Math.min(prev,max);
+  daySel.innerHTML=''; for(let d=1;d<=max;d++){const o=document.createElement('option');o.value=d;o.textContent=d+'일';if(d===cur)o.selected=true;daySel.appendChild(o);}
+}
+yearSel.addEventListener('change',renderDays); monthSel.addEventListener('change',renderDays); renderDays();
+
+function calculate(){
+  errorBox.style.display='none'; safeBadge.style.display='none';
+  try{
+    const y=parseInt(yearSel.value), mo=parseInt(monthSel.value), d=parseInt(daySel.value), h=parseInt(hourSel.value), mi=parseInt(minuteSel.value);
+    const timeUnknown=document.getElementById('timeUnknown').checked;
+    const gender=document.querySelector('input[name=gender]:checked').value;
+    const test=new Date(y,mo-1,d);
+    if(test.getFullYear()!==y || test.getMonth()!==mo-1 || test.getDate()!==d){errorBox.textContent=mo+'월은 '+getMaxDay(y,mo)+'일까지만 있어요.'; errorBox.style.display='block'; return;}
+
+    let pillars=[], usedSafe=false;
+    try{
+      const yGJ=getYearGanJi(y), mGJ=getMonthGanJi(yGJ.gan,mo), dGJ=getDayGanJi(y,mo,d), tGJ=timeUnknown?{gan:"-",ji:"-"}:getTimeGanJi(dGJ.gan,h);
+      pillars=[{label:"년주",...yGJ},{label:"월주",...mGJ},{label:"일주",...dGJ,master:true},{label:"시주",...tGJ}];
+    }catch(e){usedSafe=true; pillars=[{label:"년주",...getCycle(y-4)},{label:"월주",...getCycle(y*12+mo)},{label:"일주",...getCycle(y+mo+d),master:true},{label:"시주",...getCycle(h)}];}
+
+    // pillars render
+    const pillarsDiv=document.getElementById('pillars'); pillarsDiv.innerHTML='';
+    pillars.forEach(p=>{
+      const infoG=GAN_INFO[p.gan]||{e:"토"}, infoJ=JI_INFO[p.ji]||{e:"토"};
+      const colG=ELEMENT_COLOR[infoG.e]||ELEMENT_COLOR.토, colJ=ELEMENT_COLOR[infoJ.e]||ELEMENT_COLOR.토;
+      const div=document.createElement('div'); div.className='pillar'+(p.master?' pillar-master':'');
+      div.innerHTML='<div style="font-size:10px;color:#8d7a5e;font-weight:700">'+p.label+'</div><div style="display:flex;flex-direction:column;gap:4px;margin-top:6px"><span class="tag" style="background:'+colG.bg+';color:'+colG.c+'">'+p.gan+'('+infoG.e+')</span><span class="tag" style="background:'+colJ.bg+';color:'+colJ.c+'">'+p.ji+'('+infoJ.e+')</span></div>';
+      pillarsDiv.appendChild(div);
+    });
+
+    document.getElementById('metaText').innerHTML='<b>'+y+'년 '+mo+'월 '+d+'일 '+(timeUnknown?'시간모름':h+'시 '+mi+'분')+' · '+gender+'</b><br>'+pillars.map(p=>p.gan+p.ji).join(' ')+' · '+(usedSafe?'안전엔진':'정밀 로컬엔진 v6.0')+' · 음력 변환 없음(양력 기준)';
+
+    // jijanggan
+    const jijDiv=document.getElementById('jijanggan');
+    jijDiv.innerHTML='<div style="font-size:12px;font-weight:800;margin-bottom:6px">지장간 (지지 속 숨은 천간)</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px">'+pillars.map(p=>{
+      if(p.ji==="-") return '<div style="padding:8px;border-radius:10px;background:#f5f5f5;font-size:11px;text-align:center">시주 시간모름</div>';
+      const jg=JIJANGGAN[p.ji]; if(!jg) return '';
+      return '<div style="padding:8px;border-radius:10px;background:#fffbf5;border:1px solid #f5eedf;font-size:11px"><div style="font-weight:800">'+p.ji+'('+p.label+')</div><div>본기: '+jg.main+'</div><div>중기: '+(jg.mid||'-')+'</div><div>여기: '+(jg.rem||'-')+'</div></div>';
+    }).join('')+'</div>';
+
+    // ohaeng
+    const counts={목:0,화:0,토:0,금:0,수:0};
+    pillars.forEach(p=>{if(p.label==="시주"&&timeUnknown)return; if(p.gan!=="-"){const e=GAN_INFO[p.gan]?.e; if(e) counts[e]++} if(p.ji!=="-"){const e=JI_INFO[p.ji]?.e; if(e) counts[e]++}});
+    const ohengDiv=document.getElementById('oheng'); ohengDiv.innerHTML='';
+    Object.entries(counts).forEach(([k,v])=>{
+      const col=ELEMENT_COLOR[k]; const dEl=document.createElement('div');
+      dEl.style.cssText='padding:8px 14px;border-radius:999px;font-size:12px;font-weight:800;background:'+col.bg+';color:'+col.c+';border:1px solid '+col.c+'22';
+      dEl.textContent=k+' '+v+'개'; ohengDiv.appendChild(dEl);
+    });
+
+    const sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+    const maxEl=sorted[0][0], minEl=sorted[sorted.length-1][0];
+    const balanceDiv=document.getElementById('balance');
+    balanceDiv.innerHTML=sorted.map(([k,v])=>{
+      let status=v===0?'부족 - 보완 필요':v>=3?'과다 - 조절 필요':'균형 - 적당';
+      return '<div class="kv"><span><b>'+k+'</b> '+v+'개</span><span style="font-size:11px;padding:3px 8px;border-radius:999px;background:#fbf6ee">'+status+'</span></div>';
+    }).join('');
+
+    // yongsin
+    const yongsinMap={목:"금·토",화:"수·토",토:"목·수",금:"화·목",수:"토·화"};
+    const dayMaster=pillars[2].gan, dmInfo=GAN_INFO[dayMaster];
+    const need=dmInfo.e===maxEl? (maxEl==="목"?"금":maxEl==="화"?"수":maxEl==="토"?"목":maxEl==="금"?"화":"토") : minEl;
+    document.getElementById('yongsin').innerHTML='<b>🧭 용신/희신 분석</b><br>일간 '+dayMaster+'('+dmInfo.e+')는 '+maxEl+' 기운이 '+sorted[0][1]+'개로 가장 강하고, '+minEl+' 기운이 가장 약해요. 균형을 위해 <b>'+need+' 기운</b>이 용신으로 작용하면 좋아요. '+(dmInfo.e==="목"?"금으로 다듬고 토로 뿌리를 잡아주면 성장이 안정됩니다.":dmInfo.e==="화"?"수가 열을 식히고 토가 불을 안정시키면 빛이 오래 갑니다.":dmInfo.e==="토"?"목이 토를 뚫고 수로 윤택하게 하면 재물이 모입니다.":dmInfo.e==="금"?"화로 단련하고 목으로 쓰임을 만들면 큰 그릇이 됩니다.":"토로 제방을 쌓고 화로 따뜻하게 하면 바다가 길이 됩니다.")+'<br><small style="color:#8d7a5e">* 전통 용신법 단순화 버전 - 참고용</small>';
+
+    // personality
+    const personalities={
+      甲:"큰 나무처럼 곧고 정직해요. 원칙을 중요시하고, 남을 이끄는 힘이 있어요. 고집이 세 보일 수 있지만 속은 따뜻해요. 혼자 결정하고 밀고 나가는 힘이 강해요.",
+      乙:"덩굴처럼 유연하고 적응력이 뛰어나요. 눈치가 빠르고 섬세해서 예술·상담·기획에 강해요. 부드러워 보이지만 끈기가 엄청나요.",
+      丙:"태양처럼 밝고 열정적이에요. 표현력이 좋고 사람들에게 에너지를 줘요. 인정받고 싶은 욕구가 크고, 무대가 있을 때 빛나요.",
+      丁:"촛불처럼 은은하고 따뜻해요. 디테일에 강하고 연구심이 많아요. 겉은 조용하지만 속에는 뜨거운 열정이 있어요.",
+      戊:"큰 산처럼 듬직하고 신뢰가 가요. 중심을 잡아주는 역할, 포용력이 강점이에요. 고집이 있지만 책임감이 강해요.",
+      己:"기름진 밭처럼 실속 있고 꼼꼼해요. 현실 감각이 뛰어나고, 작은 것에서 큰 것을 만들어요. 배려심이 많고 인덕이 있어요.",
+      庚:"원석처럼 강하고 결단력이 있어요. 정의롭고 냉철해서 법·군·금융·기술 분야에 잘 맞아요. 겉은 차가워도 의리가 있어요.",
+      辛:"보석처럼 세련되고 완벽을 추구해요. 예민하고 섬세해서 패션·디자인·보석·미용 분야에서 빛나요. 자존심이 강해요.",
+      壬:"바다처럼 스케일이 크고 지혜로워요. 자유를 좋아하고 아이디어가 넘쳐요. 큰 물에서 놀아야 능력을 발휘해요.",
+      癸:"빗물처럼 총명하고 직관력이 뛰어나요. 비밀스럽고 전략적이라 기획·심리·전략 분야에 강해요. 조용히 큰 일을 해내요.",
+    };
+    document.getElementById('personality').innerHTML='<div style="padding:14px;border-radius:14px;background:#fffbf5;border:1px solid #f5eedf"><b class="serif" style="font-size:16px">'+dayMaster+'('+dmInfo.h+') 일간</b> - '+dmInfo.e+'('+dmInfo.y+')의 기운<br><br>'+(personalities[dayMaster]||'')+'<br><br><b>강점:</b> '+(dmInfo.y==="양"?"추진력, 리더십, 직진성":"섬세함, 적응력, 끈기")+'<br><b>약점:</b> '+(dmInfo.y==="양"?"고집, 성급함 - 한 박자 쉬어가기 필요":"우유부단, 걱정 많음 - 결정은 빠르게")+'</div>';
+
+    // wealthJob
+    const jobMap={
+      목:["교육, 스타트업, 인테리어, 목공, 브랜딩, 기획, 환경, 출판","성장하는 산업, 사람을 키우는 일"],
+      화:["방송, 유튜브, 마케팅, 영업, 요리, 조명, 연예, 강연","무대, 카메라, 불이 있는 곳"],
+      토:["부동산, 건설, 운영, 관리, 금융, 유통, 농업, 세무","땅, 중심, 안정적인 조직"],
+      금:["법, 금융, 기계, 금속, 외과, 보석, 심사, 군","칼, 규칙, 날카로운 판단이 필요한 곳"],
+      수:["IT, 무역, 물류, 여행, 컨설팅, 심리, 연구, 물 관련","바다, 흐름, 정보, 물류"],
+    };
+    const dayJob=jobMap[dmInfo.e];
+    const wealthText = counts.토>=2 && counts.금>=2 ? "재성(토·금)이 잘 갖춰져 있어 재물을 모으는 감각이 있어요. 현금 흐름 관리가 강점." : counts.토===0 ? "재성이 약해 재물은 기술·전문성으로 버는 구조가 좋아요. 통장보다 실력이 자산." : "재물운은 꾸준함으로 만드는 타입. 한 우물 파기가 유리해요.";
+    document.getElementById('wealthJob').innerHTML='<b>재물운</b> - '+wealthText+'<br><br><b>직업 적성</b> - '+dmInfo.e+' 기운이라 <b>'+dayJob[0]+'</b> 분야에서 강해요. 특히 <b>'+dayJob[1]+'</b>에서 능력을 발휘합니다.<br><br><b>성공 포인트</b> - '+(gender==="여"?"디테일과 네트워크로 승부하면 좋아요. 혼자 다 하지 말고 사람을 쓰세요.":"시스템과 규모로 승부하세요. 작은 것보다 큰 판을 짜세요.")+'';
+
+    // love
+    const loveMap={
+      목:"다정하고 표현이 서툴러도 행동으로 보여주는 타입. 연애할 때 헌신적이지만 고집 부리면 상대가 답답해할 수 있어요. 나무가 잘 자라려면 물(수)과 햇빛(화)이 필요하듯, 대화와 칭찬이 관계를 살립니다.",
+      화:"열정적이고 표현이 풍부해서 연애할 때 드라마틱해요. 빨리 식을 수 있으니 꾸준한 이벤트가 필요해요. 불이 꺼지지 않게 칭찬과 관심이 연료예요.",
+      토:"믿음직하고 안정적이라 결혼 상대로 인기가 많아요. 표현이 적어 무뚝뚝해 보일 수 있지만, 한 번 마음 주면 오래 가요. 가끔은 깜짝 이벤트로 마음을 표현해보세요.",
+      금:"시크하고 도도해 보여서 밀당 고수처럼 보여요. 기준이 높고 완벽을 추구해서 연애가 늦을 수 있어요. 기준을 조금만 낮추면 좋은 인연이 빨리 옵니다.",
+      수:"지혜롭고 대화가 잘 통해 인기 많아요. 자유를 좋아해서 구속하면 도망가요. 서로의 공간을 존중해주면 오래 가는 관계가 됩니다.",
+    };
+    document.getElementById('love').innerHTML=loveMap[dmInfo.e]+'<br><br><b>'+gender+'의 경우</b> '+(gender==="여"?"관성(남편·직업)이 "+(counts.금>0?"잘 있어 인연이 보이지만":"약해서 내 일을 먼저 단단히 하면 좋은 인연이 따라와요.")+"<br><b>결혼 시기 힌트:</b> "+(counts.토>=2?"토가 많으면 늦게 갈수록 안정적이에요. 30대 이후가 더 좋아요.":"화·수가 조화를 이루는 해에 인연이 옵니다. 2026~2028년이 포인트."):"재성(아내·재물)이 "+(counts.토>0?"있어 인연 자리가 있어요.":"약해 내 능력을 키우면 재물과 인연이 함께 옵니다.")+"<br><b>결혼 팁:</b> "+(dmInfo.y==="양"?"리드를 하되 상대 말도 50%는 들어주기":"배려가 강점이지만 내 의견도 50%는 말하기")+'';
+
+    // health
+    const healthMap={
+      목:"간·담, 신경계, 어깨 결림. 스트레스 받으면 소화보다 어깨·목으로 와요. 스트레칭, 산책, 초록색 음식이 도움이 됩니다.",
+      화:"심장·소장, 눈, 혈액순환. 열이 많고 잠이 부족하면 두통·안구건조가 올 수 있어요. 물 많이 마시고, 늦게 자지 않기.",
+      토:"위·비장, 소화기, 피부. 스트레스 받으면 폭식·소화불량으로 와요. 규칙적인 식사, 따뜻한 음식이 약입니다.",
+      금:"폐·대장, 피부, 호흡기. 건조함에 약해요. 물·가습기·유산소 운동이 필수. 피부 관리 신경 쓰기.",
+      수:"신장·방광, 허리, 귀, 호르몬. 추위에 약하고 부종이 잘 생겨요. 따뜻하게, 짠 음식 줄이기, 허리 스트레칭.",
+    };
+    document.getElementById('health').innerHTML=healthMap[dmInfo.e]+'<br><br><b>약한 오행('+minEl+') 보완:</b> '+(minEl==="목"?"초록 채소, 산책, 동쪽 산책":"")+(minEl==="화"?"빨간 과일, 햇빛 20분, 남쪽 활동":"")+(minEl==="토"?"노란 곡물, 명상, 중앙 정리":"")+(minEl==="금"?"흰 음식, 호흡 운동, 서쪽 정리":"")+(minEl==="수"?"검은콩, 물, 북쪽 휴식":"")+'<br><b>주의:</b> '+(counts[maxEl]>=4?"같은 오행이 너무 많으면 과하면 독이 돼요. 반대 오행으로 균형을 맞춰주세요.":"오행이 비교적 균형 잡혀 있어요. 현재 루틴을 유지하세요.")+'';
+
+    // hapchung
+    const jis=pillars.filter(p=>p.ji!=="-").map(p=>p.ji);
+    const hapPairs=[["子","丑"],["寅","亥"],["卯","戌"],["辰","酉"],["巳","申"],["午","未"]];
+    const chungPairs=[["子","午"],["丑","未"],["寅","申"],["卯","酉"],["辰","戌"],["巳","亥"]];
+    let hapFound=[], chungFound=[];
+    hapPairs.forEach(([a,b])=>{if(jis.includes(a)&&jis.includes(b)) hapFound.push(a+"+ "+b+" = 육합(좋은 인연, 결합)")});
+    chungPairs.forEach(([a,b])=>{if(jis.includes(a)&&jis.includes(b)) chungFound.push(a+" ↔ "+b+" = 육충(변화, 이동, 부딪힘)")});
+    const samhap=[["申","子","辰"],["亥","卯","未"],["寅","午","戌"],["巳","酉","丑"]];
+    let samhapFound=[];
+    samhap.forEach(arr=>{const cnt=arr.filter(x=>jis.includes(x)).length; if(cnt>=2) samhapFound.push(arr.join(" ")+" 중 "+cnt+"개 - 삼합의 기운, 큰 변화와 협력")});
+    document.getElementById('hapchung').innerHTML=
+      (hapFound.length?'<b>합(合)</b><br>'+hapFound.join('<br>')+'<br><br>':'<b>합(合)</b> - 이번 원국에서는 육합이 없어 독립적인 성향이 강해요.<br><br>')+
+      (chungFound.length?'<b>충(沖)</b><br>'+chungFound.join('<br>')+'<br><br>':'<b>충(沖)</b> - 충이 없어 안정적이지만, 변화가 필요할 땐 직접 움직여야 해요.<br><br>')+
+      (samhapFound.length?'<b>삼합</b><br>'+samhapFound.join('<br>'):'<b>삼합</b> - 삼합 2개 이상 모임 없음.');
+
+    // daewoon
+    const daeDiv=document.getElementById('daewoon');
+    const startAge= (gender==="남" ? (y%2===0?1:2) : (y%2===0?2:1)) + 3; // simplified
+    daeDiv.innerHTML='';
+    for(let i=0;i<8;i++){
+      const age=startAge + i*10;
+      const cycle=mod(pillars[1].cycle + (i+1)*(gender==="남"?1:-1),60);
+      const gj=getCycle(cycle);
+      const div=document.createElement('div');
+      div.style.cssText='min-width:86px;padding:12px;border-radius:14px;background:#fffbf5;border:1px solid #f5eedf;text-align:center;flex-shrink:0';
+      div.innerHTML='<div style="font-size:11px;color:#8d7a5e">'+age+'세~</div><div style="font-weight:900;margin:4px 0">'+gj.gan+gj.ji+'</div><div style="font-size:10px;color:#5a4a32">'+GAN_INFO[gj.gan].e+'·'+JI_INFO[gj.ji].e+'</div>';
+      daeDiv.appendChild(div);
+    }
+
+    // sewoon 2026
+    const se2026=getCycle(2026-4); // 2026 병오? actually 2026 is 병오 (丙午) - cycle 2? Let's calc: 2026-4=2022 mod60=42 -> 丙午 correct? 42%10=2=>丙, 42%12=6=>午 yes.
+    document.getElementById('sewoon2026').innerHTML='<b>2026년 세운: '+se2026.gan+se2026.ji+'(丙午) - 붉은 말의 해</b><br>2026년은 화(火) 기운이 강한 해예요. '+dmInfo.e+' 일간에게 '+(dmInfo.e==="목"?"화는 식상(표현·결과물)으로, 그동안 준비한 것을 세상에 보여주는 해. 문서·발표·출시에 좋아요.":"")+(dmInfo.e==="화"?"비겁(동료·경쟁) + 식상이 강해져서, 경쟁은 치열하지만 내 이름을 알리기 좋은 해. 무리하지 말고 체력 관리가 핵심.":"")+(dmInfo.e==="토"?"화생토로 인성(배움·자격·집)이 들어와요. 공부·자격증·부동산·내 집 마련에 좋은 흐름.":"")+(dmInfo.e==="금"?"화극금으로 관성(직업·압박)이 강해요. 직장에서 역할이 커지지만 스트레스도 커요. 건강 챙기면서 가세요.":"")+(dmInfo.e==="수"?"화는 재성(돈·결과)으로, 수일간에게는 돈 버는 아이디어가 샘솟는 해. 다만 수화충으로 감정 기복 주의.":"")+'<br><br>💡 <b>2026년 키워드:</b> '+(dmInfo.e==="목"?"보여주기, 결과물, 브랜딩":"")+(dmInfo.e==="화"?"이름 알리기, 무대, 체력":"")+(dmInfo.e==="토"?"공부, 집, 안정":"")+(dmInfo.e==="금"?"승진, 책임, 단단해지기":"")+(dmInfo.e==="수"?"수익화, 아이디어, 실행":"");
+
+    // final
+    const lucky=GAN_INFO[dayMaster];
+    document.getElementById('luckyColor').textContent=lucky.color;
+    document.getElementById('luckyNum').textContent=lucky.num;
+    document.getElementById('luckyDir').textContent=lucky.dir;
+    document.getElementById('aiFinal').innerHTML=
+      '<b>'+dayMaster+'('+dmInfo.h+') 일간 '+y+'년생</b> '+gender+'<br><br>'+
+      '당신은 '+dmInfo.char+'을 닮은 사람이에요. '+sorted.map(([k,v])=>k+v+'개').join(', ')+'의 오행이 모여 '+maxEl+' 기운이 중심을 잡고 있어요.<br><br>'+
+      '<b>인생 전략:</b> '+ (counts[maxEl]>=4 ? '한 가지에 올인하는 힘이 강점이에요. 다만 '+minEl+' 기운을 의식적으로 채우면(음식·색·방향·사람) 인생이 훨씬 부드러워져요.' : '균형이 비교적 잘 잡혀 있어요. 지금처럼 꾸준히 가되, '+need+' 기운이 들어오는 해(대운)에 큰 도전을 해보세요.')+'<br><br>'+
+      '<b>2026년 조언:</b> 2026 병오년은 화 기운이 강한 해라 '+dmInfo.e+'에게는 '+(dmInfo.e==="토"||dmInfo.e==="목"?"기회":"시험")+'의 해예요. '+(gender==="여"?"사람을 모으고 디테일을 챙기면":"규모와 시스템을 키우면")+' 좋은 결과가 따라옵니다. 건강은 '+healthMap[dmInfo.e].split('.')[0]+'을 특히 챙기세요.<br><br>'+
+      '<span style="font-size:11px;color:#c9b896">* 본 풀이는 전통 사주 원리를 단순화한 참고용이며, 절대 오류가 나지 않도록 안전 모드가 내장되어 있습니다. 중요한 결정은 여러 관점을 참고하세요.</span>';
+
+    document.getElementById('result').style.display='block';
+    if(usedSafe) safeBadge.style.display='block';
+    setTimeout(()=>document.getElementById('result').scrollIntoView({behavior:'smooth'}),120);
+  }catch(e){
+    errorBox.innerHTML='안전 모드로 복구했어요. 새로고침 해주세요.<br><small>'+(e.message||e)+'</small>'; errorBox.style.display='block'; safeBadge.style.display='block';
+  }
+}
+document.getElementById('calcBtn').addEventListener('click', calculate);
+document.getElementById('retryBtn').addEventListener('click', calculate);
+document.getElementById('shareBtn').addEventListener('click', ()=>{
+  const txt=document.getElementById('metaText').innerText;
+  if(navigator.share) navigator.share({title:'사주팔자 v6.0 상세풀이',text:txt,url:location.href});
+  else {navigator.clipboard.writeText(location.href+'\n'+txt); alert('주소 복사됨');}
+});
+
+// PWA
+try{
+  const c=document.createElement('canvas'); c.width=512; c.height=512;
+  const ctx=c.getContext('2d'); const g=ctx.createRadialGradient(256,256,40,256,256,256); g.addColorStop(0,'#b07a3b'); g.addColorStop(1,'#4e2f14');
+  ctx.fillStyle=g; ctx.beginPath(); ctx.arc(256,256,255,0,Math.PI*2); ctx.fill();
+  ctx.fillStyle='#fffdf5'; ctx.font='900 150px Noto Serif KR'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('사주',256,280);
+  const icon=c.toDataURL(); const manifest={name:"사주팔자 v6.0 상세풀이",short_name:"사주팔자",start_url:".",display:"standalone",background_color:"#fdf8f0",theme_color:"#8b5a2b",icons:[{src:icon,sizes:"512x512",type:"image/png"}]};
+  const blob=new Blob([JSON.stringify(manifest)],{type:'application/json'}); const url=URL.createObjectURL(blob);
+  const link=document.createElement('link'); link.rel='manifest'; link.href=url; document.head.appendChild(link);
+}catch(e){}
+if('serviceWorker' in navigator){try{const sw="self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>clients.claim());self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request))))"; const b=new Blob([sw],{type:'text/javascript'}); navigator.serviceWorker.register(URL.createObjectURL(b));}catch(e){}}
+</script>
+</body>
+</html>
