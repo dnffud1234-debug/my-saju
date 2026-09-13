@@ -1,0 +1,381 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사주 v28.0 - 해석 강화</title>
+<style>
+body{margin:0;padding:12px;background:#fdf8f0;font-family:sans-serif;line-height:1.7}
+.card{background:#fff;border:1px solid #ddd;border-radius:16px;padding:16px;margin:0 auto 12px;max-width:880px}
+select,input{width:100%;height:52px;border:2px solid #bbb;border-radius:12px;padding:0 10px;margin-bottom:6px;box-sizing:border-box;font-size:15px}
+.btn{width:100%;height:56px;border:none;border-radius:999px;background:#111;color:#fff;font-weight:900;font-size:16px;cursor:pointer;margin-top:8px}
+.tabbar{display:flex;gap:6px;max-width:880px;margin:10px auto}
+.tab{flex:1;height:44px;border-radius:999px;border:1px solid #ccc;background:#fff;font-weight:700}
+.radioGroup{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:6px 0}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pillar{text-align:center;padding:10px 4px;border-radius:12px;background:#fffbf5;border:1px solid #eee}
+</style>
+</head>
+<body>
+<div style="max-width:880px;margin:0 auto">
+<h1 style="font-size:22px;margin:8px 0">사주팔자 정밀 풀이</h1>
+<div class="tabbar">
+<button class="tab" onclick="document.getElementById('tab-my').style.display='block';document.getElementById('tab-couple').style.display='none';document.getElementById('tab-today').style.display='none';">내 사주</button>
+<button class="tab" onclick="document.getElementById('tab-my').style.display='none';document.getElementById('tab-couple').style.display='block';document.getElementById('tab-today').style.display='none';">궁합·자녀·시댁</button>
+<button class="tab" onclick="document.getElementById('tab-my').style.display='none';document.getElementById('tab-couple').style.display='none';document.getElementById('tab-today').style.display='block';">오늘운세</button>
+</div>
+
+<div id="tab-my" style="display:block">
+<div class="card">
+<input id="my_name" value="지태우" placeholder="이름">
+<div class="radioGroup"><label><input type="radio" name="gender" value="여" checked> 여</label><label><input type="radio" name="gender" value="남"> 남</label><label><input type="radio" name="lunar" value="양력" checked> 양력</label><label><input type="radio" name="lunar" value="음력"> 음력</label></div>
+<div class="grid3"><select id="year"><option value="1920">1920년</option><option value="1921">1921년</option><option value="1922">1922년</option><option value="1923">1923년</option><option value="1924">1924년</option><option value="1925">1925년</option><option value="1926">1926년</option><option value="1927">1927년</option><option value="1928">1928년</option><option value="1929">1929년</option><option value="1930">1930년</option><option value="1931">1931년</option><option value="1932">1932년</option><option value="1933">1933년</option><option value="1934">1934년</option><option value="1935">1935년</option><option value="1936">1936년</option><option value="1937">1937년</option><option value="1938">1938년</option><option value="1939">1939년</option><option value="1940">1940년</option><option value="1941">1941년</option><option value="1942">1942년</option><option value="1943">1943년</option><option value="1944">1944년</option><option value="1945">1945년</option><option value="1946">1946년</option><option value="1947">1947년</option><option value="1948">1948년</option><option value="1949">1949년</option><option value="1950">1950년</option><option value="1951">1951년</option><option value="1952">1952년</option><option value="1953">1953년</option><option value="1954">1954년</option><option value="1955">1955년</option><option value="1956">1956년</option><option value="1957">1957년</option><option value="1958">1958년</option><option value="1959">1959년</option><option value="1960">1960년</option><option value="1961">1961년</option><option value="1962">1962년</option><option value="1963">1963년</option><option value="1964">1964년</option><option value="1965">1965년</option><option value="1966">1966년</option><option value="1967">1967년</option><option value="1968">1968년</option><option value="1969">1969년</option><option value="1970">1970년</option><option value="1971">1971년</option><option value="1972">1972년</option><option value="1973">1973년</option><option value="1974">1974년</option><option value="1975">1975년</option><option value="1976">1976년</option><option value="1977">1977년</option><option value="1978">1978년</option><option value="1979">1979년</option><option value="1980">1980년</option><option value="1981">1981년</option><option value="1982">1982년</option><option value="1983">1983년</option><option value="1984">1984년</option><option value="1985">1985년</option><option value="1986">1986년</option><option value="1987">1987년</option><option value="1988">1988년</option><option value="1989">1989년</option><option value="1990">1990년</option><option value="1991">1991년</option><option value="1992">1992년</option><option value="1993">1993년</option><option value="1994">1994년</option><option value="1995">1995년</option><option value="1996">1996년</option><option value="1997">1997년</option><option value="1998">1998년</option><option value="1999">1999년</option><option value="2000">2000년</option><option value="2001">2001년</option><option value="2002">2002년</option><option value="2003">2003년</option><option value="2004">2004년</option><option value="2005">2005년</option><option value="2006">2006년</option><option value="2007">2007년</option><option value="2008">2008년</option><option value="2009">2009년</option><option value="2010">2010년</option><option value="2011">2011년</option><option value="2012">2012년</option><option value="2013">2013년</option><option value="2014">2014년</option><option value="2015">2015년</option><option value="2016">2016년</option><option value="2017">2017년</option><option value="2018">2018년</option><option value="2019">2019년</option><option value="2020">2020년</option><option value="2021">2021년</option><option value="2022">2022년</option><option value="2023">2023년</option><option value="2024">2024년</option><option value="2025">2025년</option><option value="2026">2026년</option><option value="2027">2027년</option><option value="2028">2028년</option><option value="2029">2029년</option><option value="2030">2030년</option><option value="2031">2031년</option><option value="2032">2032년</option><option value="2033">2033년</option><option value="2034">2034년</option><option value="2035">2035년</option></select><select id="month"><option value="1">1월</option><option value="2">2월</option><option value="3">3월</option><option value="4">4월</option><option value="5">5월</option><option value="6">6월</option><option value="7">7월</option><option value="8">8월</option><option value="9">9월</option><option value="10">10월</option><option value="11">11월</option><option value="12">12월</option></select><select id="day"><option value="1">1일</option><option value="2">2일</option><option value="3">3일</option><option value="4">4일</option><option value="5">5일</option><option value="6">6일</option><option value="7">7일</option><option value="8">8일</option><option value="9">9일</option><option value="10">10일</option><option value="11">11일</option><option value="12">12일</option><option value="13">13일</option><option value="14">14일</option><option value="15">15일</option><option value="16">16일</option><option value="17">17일</option><option value="18">18일</option><option value="19">19일</option><option value="20">20일</option><option value="21">21일</option><option value="22">22일</option><option value="23">23일</option><option value="24">24일</option><option value="25">25일</option><option value="26">26일</option><option value="27">27일</option><option value="28">28일</option><option value="29">29일</option><option value="30">30일</option><option value="31">31일</option></select></div>
+<div class="grid3"><select id="hour"><option value="0">0시</option><option value="1">1시</option><option value="2">2시</option><option value="3">3시</option><option value="4">4시</option><option value="5">5시</option><option value="6">6시</option><option value="7">7시</option><option value="8">8시</option><option value="9">9시</option><option value="10">10시</option><option value="11">11시</option><option value="12">12시</option><option value="13">13시</option><option value="14">14시</option><option value="15">15시</option><option value="16">16시</option><option value="17">17시</option><option value="18">18시</option><option value="19">19시</option><option value="20">20시</option><option value="21">21시</option><option value="22">22시</option><option value="23">23시</option></select><select><option>30분</option></select><select><option>시간모름</option></select></div>
+<button class="btn" onclick="document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView();calcMy();">정밀 풀이 보기</button>
+</div>
+<div id="result" style="display:none">
+<div class="card"><h3 style="margin:0 0 8px">사주 원국</h3><div id="pillars" style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px"></div><div id="metaText" style="font-size:12px;color:#666;margin-top:8px"></div></div>
+<div class="card"><div id="sinGang" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card"><div id="yongsin" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card"><div id="personality" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card"><div id="wealthJob" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card"><div id="love" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card"><div id="health" style="font-size:14px;line-height:1.9"></div><div id="daewoon" style="display:flex;gap:6px;overflow-x:auto;margin-top:8px"></div></div>
+<div class="card" style="background:#111;color:#fff"><div id="aiFinal" style="font-size:14px;line-height:1.9;color:#f5eedf"></div></div>
+</div>
+</div>
+
+<div id="tab-couple" style="display:none">
+<div class="card">
+<h3>궁합·결혼·자녀·시댁</h3>
+<input id="c1_name" value="나"><div class="grid3"><select id="c1_year"><option value="1920">1920년</option><option value="1921">1921년</option><option value="1922">1922년</option><option value="1923">1923년</option><option value="1924">1924년</option><option value="1925">1925년</option><option value="1926">1926년</option><option value="1927">1927년</option><option value="1928">1928년</option><option value="1929">1929년</option><option value="1930">1930년</option><option value="1931">1931년</option><option value="1932">1932년</option><option value="1933">1933년</option><option value="1934">1934년</option><option value="1935">1935년</option><option value="1936">1936년</option><option value="1937">1937년</option><option value="1938">1938년</option><option value="1939">1939년</option><option value="1940">1940년</option><option value="1941">1941년</option><option value="1942">1942년</option><option value="1943">1943년</option><option value="1944">1944년</option><option value="1945">1945년</option><option value="1946">1946년</option><option value="1947">1947년</option><option value="1948">1948년</option><option value="1949">1949년</option><option value="1950">1950년</option><option value="1951">1951년</option><option value="1952">1952년</option><option value="1953">1953년</option><option value="1954">1954년</option><option value="1955">1955년</option><option value="1956">1956년</option><option value="1957">1957년</option><option value="1958">1958년</option><option value="1959">1959년</option><option value="1960">1960년</option><option value="1961">1961년</option><option value="1962">1962년</option><option value="1963">1963년</option><option value="1964">1964년</option><option value="1965">1965년</option><option value="1966">1966년</option><option value="1967">1967년</option><option value="1968">1968년</option><option value="1969">1969년</option><option value="1970">1970년</option><option value="1971">1971년</option><option value="1972">1972년</option><option value="1973">1973년</option><option value="1974">1974년</option><option value="1975">1975년</option><option value="1976">1976년</option><option value="1977">1977년</option><option value="1978">1978년</option><option value="1979">1979년</option><option value="1980">1980년</option><option value="1981">1981년</option><option value="1982">1982년</option><option value="1983">1983년</option><option value="1984">1984년</option><option value="1985">1985년</option><option value="1986">1986년</option><option value="1987">1987년</option><option value="1988">1988년</option><option value="1989">1989년</option><option value="1990">1990년</option><option value="1991">1991년</option><option value="1992">1992년</option><option value="1993">1993년</option><option value="1994">1994년</option><option value="1995">1995년</option><option value="1996">1996년</option><option value="1997">1997년</option><option value="1998">1998년</option><option value="1999">1999년</option><option value="2000">2000년</option><option value="2001">2001년</option><option value="2002">2002년</option><option value="2003">2003년</option><option value="2004">2004년</option><option value="2005">2005년</option><option value="2006">2006년</option><option value="2007">2007년</option><option value="2008">2008년</option><option value="2009">2009년</option><option value="2010">2010년</option><option value="2011">2011년</option><option value="2012">2012년</option><option value="2013">2013년</option><option value="2014">2014년</option><option value="2015">2015년</option><option value="2016">2016년</option><option value="2017">2017년</option><option value="2018">2018년</option><option value="2019">2019년</option><option value="2020">2020년</option><option value="2021">2021년</option><option value="2022">2022년</option><option value="2023">2023년</option><option value="2024">2024년</option><option value="2025">2025년</option><option value="2026">2026년</option><option value="2027">2027년</option><option value="2028">2028년</option><option value="2029">2029년</option><option value="2030">2030년</option><option value="2031">2031년</option><option value="2032">2032년</option><option value="2033">2033년</option><option value="2034">2034년</option><option value="2035">2035년</option></select><select id="c1_month"><option value="1">1월</option><option value="2">2월</option><option value="3">3월</option><option value="4">4월</option><option value="5">5월</option><option value="6">6월</option><option value="7">7월</option><option value="8">8월</option><option value="9">9월</option><option value="10">10월</option><option value="11">11월</option><option value="12">12월</option></select><select id="c1_day"><option value="1">1일</option><option value="2">2일</option><option value="3">3일</option><option value="4">4일</option><option value="5">5일</option><option value="6">6일</option><option value="7">7일</option><option value="8">8일</option><option value="9">9일</option><option value="10">10일</option><option value="11">11일</option><option value="12">12일</option><option value="13">13일</option><option value="14">14일</option><option value="15">15일</option><option value="16">16일</option><option value="17">17일</option><option value="18">18일</option><option value="19">19일</option><option value="20">20일</option><option value="21">21일</option><option value="22">22일</option><option value="23">23일</option><option value="24">24일</option><option value="25">25일</option><option value="26">26일</option><option value="27">27일</option><option value="28">28일</option><option value="29">29일</option><option value="30">30일</option><option value="31">31일</option></select></div>
+<div class="radioGroup"><label><input type="radio" name="c1_gender" value="여" checked> 여</label><label><input type="radio" name="c1_gender" value="남"> 남</label><label><input type="radio" name="c1_lunar" value="양력" checked> 양력</label><label><input type="radio" name="c1_lunar" value="음력"> 음력</label></div>
+<input id="c2_name" value="상대방"><div class="grid3"><select id="c2_year"><option value="1920">1920년</option><option value="1921">1921년</option><option value="1922">1922년</option><option value="1923">1923년</option><option value="1924">1924년</option><option value="1925">1925년</option><option value="1926">1926년</option><option value="1927">1927년</option><option value="1928">1928년</option><option value="1929">1929년</option><option value="1930">1930년</option><option value="1931">1931년</option><option value="1932">1932년</option><option value="1933">1933년</option><option value="1934">1934년</option><option value="1935">1935년</option><option value="1936">1936년</option><option value="1937">1937년</option><option value="1938">1938년</option><option value="1939">1939년</option><option value="1940">1940년</option><option value="1941">1941년</option><option value="1942">1942년</option><option value="1943">1943년</option><option value="1944">1944년</option><option value="1945">1945년</option><option value="1946">1946년</option><option value="1947">1947년</option><option value="1948">1948년</option><option value="1949">1949년</option><option value="1950">1950년</option><option value="1951">1951년</option><option value="1952">1952년</option><option value="1953">1953년</option><option value="1954">1954년</option><option value="1955">1955년</option><option value="1956">1956년</option><option value="1957">1957년</option><option value="1958">1958년</option><option value="1959">1959년</option><option value="1960">1960년</option><option value="1961">1961년</option><option value="1962">1962년</option><option value="1963">1963년</option><option value="1964">1964년</option><option value="1965">1965년</option><option value="1966">1966년</option><option value="1967">1967년</option><option value="1968">1968년</option><option value="1969">1969년</option><option value="1970">1970년</option><option value="1971">1971년</option><option value="1972">1972년</option><option value="1973">1973년</option><option value="1974">1974년</option><option value="1975">1975년</option><option value="1976">1976년</option><option value="1977">1977년</option><option value="1978">1978년</option><option value="1979">1979년</option><option value="1980">1980년</option><option value="1981">1981년</option><option value="1982">1982년</option><option value="1983">1983년</option><option value="1984">1984년</option><option value="1985">1985년</option><option value="1986">1986년</option><option value="1987">1987년</option><option value="1988">1988년</option><option value="1989">1989년</option><option value="1990">1990년</option><option value="1991">1991년</option><option value="1992">1992년</option><option value="1993">1993년</option><option value="1994">1994년</option><option value="1995">1995년</option><option value="1996">1996년</option><option value="1997">1997년</option><option value="1998">1998년</option><option value="1999">1999년</option><option value="2000">2000년</option><option value="2001">2001년</option><option value="2002">2002년</option><option value="2003">2003년</option><option value="2004">2004년</option><option value="2005">2005년</option><option value="2006">2006년</option><option value="2007">2007년</option><option value="2008">2008년</option><option value="2009">2009년</option><option value="2010">2010년</option><option value="2011">2011년</option><option value="2012">2012년</option><option value="2013">2013년</option><option value="2014">2014년</option><option value="2015">2015년</option><option value="2016">2016년</option><option value="2017">2017년</option><option value="2018">2018년</option><option value="2019">2019년</option><option value="2020">2020년</option><option value="2021">2021년</option><option value="2022">2022년</option><option value="2023">2023년</option><option value="2024">2024년</option><option value="2025">2025년</option><option value="2026">2026년</option><option value="2027">2027년</option><option value="2028">2028년</option><option value="2029">2029년</option><option value="2030">2030년</option><option value="2031">2031년</option><option value="2032">2032년</option><option value="2033">2033년</option><option value="2034">2034년</option><option value="2035">2035년</option></select><select id="c2_month"><option value="1">1월</option><option value="2">2월</option><option value="3">3월</option><option value="4">4월</option><option value="5">5월</option><option value="6">6월</option><option value="7">7월</option><option value="8">8월</option><option value="9">9월</option><option value="10">10월</option><option value="11">11월</option><option value="12">12월</option></select><select id="c2_day"><option value="1">1일</option><option value="2">2일</option><option value="3">3일</option><option value="4">4일</option><option value="5">5일</option><option value="6">6일</option><option value="7">7일</option><option value="8">8일</option><option value="9">9일</option><option value="10">10일</option><option value="11">11일</option><option value="12">12일</option><option value="13">13일</option><option value="14">14일</option><option value="15">15일</option><option value="16">16일</option><option value="17">17일</option><option value="18">18일</option><option value="19">19일</option><option value="20">20일</option><option value="21">21일</option><option value="22">22일</option><option value="23">23일</option><option value="24">24일</option><option value="25">25일</option><option value="26">26일</option><option value="27">27일</option><option value="28">28일</option><option value="29">29일</option><option value="30">30일</option><option value="31">31일</option></select></div>
+<div class="radioGroup"><label><input type="radio" name="c2_gender" value="남" checked> 남</label><label><input type="radio" name="c2_gender" value="여"> 여</label><label><input type="radio" name="c2_lunar" value="양력" checked> 양력</label><label><input type="radio" name="c2_lunar" value="음력"> 음력</label></div>
+<input id="s_name" value="시어머니"><div class="grid3"><select id="s_year"><option value="1920">1920년</option><option value="1921">1921년</option><option value="1922">1922년</option><option value="1923">1923년</option><option value="1924">1924년</option><option value="1925">1925년</option><option value="1926">1926년</option><option value="1927">1927년</option><option value="1928">1928년</option><option value="1929">1929년</option><option value="1930">1930년</option><option value="1931">1931년</option><option value="1932">1932년</option><option value="1933">1933년</option><option value="1934">1934년</option><option value="1935">1935년</option><option value="1936">1936년</option><option value="1937">1937년</option><option value="1938">1938년</option><option value="1939">1939년</option><option value="1940">1940년</option><option value="1941">1941년</option><option value="1942">1942년</option><option value="1943">1943년</option><option value="1944">1944년</option><option value="1945">1945년</option><option value="1946">1946년</option><option value="1947">1947년</option><option value="1948">1948년</option><option value="1949">1949년</option><option value="1950">1950년</option><option value="1951">1951년</option><option value="1952">1952년</option><option value="1953">1953년</option><option value="1954">1954년</option><option value="1955">1955년</option><option value="1956">1956년</option><option value="1957">1957년</option><option value="1958">1958년</option><option value="1959">1959년</option><option value="1960">1960년</option><option value="1961">1961년</option><option value="1962">1962년</option><option value="1963">1963년</option><option value="1964">1964년</option><option value="1965">1965년</option><option value="1966">1966년</option><option value="1967">1967년</option><option value="1968">1968년</option><option value="1969">1969년</option><option value="1970">1970년</option><option value="1971">1971년</option><option value="1972">1972년</option><option value="1973">1973년</option><option value="1974">1974년</option><option value="1975">1975년</option><option value="1976">1976년</option><option value="1977">1977년</option><option value="1978">1978년</option><option value="1979">1979년</option><option value="1980">1980년</option><option value="1981">1981년</option><option value="1982">1982년</option><option value="1983">1983년</option><option value="1984">1984년</option><option value="1985">1985년</option><option value="1986">1986년</option><option value="1987">1987년</option><option value="1988">1988년</option><option value="1989">1989년</option><option value="1990">1990년</option><option value="1991">1991년</option><option value="1992">1992년</option><option value="1993">1993년</option><option value="1994">1994년</option><option value="1995">1995년</option><option value="1996">1996년</option><option value="1997">1997년</option><option value="1998">1998년</option><option value="1999">1999년</option><option value="2000">2000년</option><option value="2001">2001년</option><option value="2002">2002년</option><option value="2003">2003년</option><option value="2004">2004년</option><option value="2005">2005년</option><option value="2006">2006년</option><option value="2007">2007년</option><option value="2008">2008년</option><option value="2009">2009년</option><option value="2010">2010년</option><option value="2011">2011년</option><option value="2012">2012년</option><option value="2013">2013년</option><option value="2014">2014년</option><option value="2015">2015년</option><option value="2016">2016년</option><option value="2017">2017년</option><option value="2018">2018년</option><option value="2019">2019년</option><option value="2020">2020년</option><option value="2021">2021년</option><option value="2022">2022년</option><option value="2023">2023년</option><option value="2024">2024년</option><option value="2025">2025년</option><option value="2026">2026년</option><option value="2027">2027년</option><option value="2028">2028년</option><option value="2029">2029년</option><option value="2030">2030년</option><option value="2031">2031년</option><option value="2032">2032년</option><option value="2033">2033년</option><option value="2034">2034년</option><option value="2035">2035년</option></select><select id="s_month"><option value="1">1월</option><option value="2">2월</option><option value="3">3월</option><option value="4">4월</option><option value="5">5월</option><option value="6">6월</option><option value="7">7월</option><option value="8">8월</option><option value="9">9월</option><option value="10">10월</option><option value="11">11월</option><option value="12">12월</option></select><select id="s_day"><option value="1">1일</option><option value="2">2일</option><option value="3">3일</option><option value="4">4일</option><option value="5">5일</option><option value="6">6일</option><option value="7">7일</option><option value="8">8일</option><option value="9">9일</option><option value="10">10일</option><option value="11">11일</option><option value="12">12일</option><option value="13">13일</option><option value="14">14일</option><option value="15">15일</option><option value="16">16일</option><option value="17">17일</option><option value="18">18일</option><option value="19">19일</option><option value="20">20일</option><option value="21">21일</option><option value="22">22일</option><option value="23">23일</option><option value="24">24일</option><option value="25">25일</option><option value="26">26일</option><option value="27">27일</option><option value="28">28일</option><option value="29">29일</option><option value="30">30일</option><option value="31">31일</option></select></div>
+<div class="radioGroup"><label><input type="radio" name="s_lunar" value="양력" checked> 양력</label><label><input type="radio" name="s_lunar" value="음력"> 음력</label></div>
+<button class="btn" style="background:linear-gradient(135deg,#8b5a2b,#c19a6b)" onclick="document.getElementById('coupleResult').style.display='block';document.getElementById('coupleResult').scrollIntoView();calcCouple();">궁합·결혼·자녀·시댁 보기</button>
+</div>
+<div id="coupleResult" style="display:none">
+<div class="card" style="text-align:center"><div id="scoreRing" style="width:130px;height:130px;border-radius:50%;background:#ffe0b2;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;margin:0 auto">0점</div><div id="coupleNames" style="font-size:13px;color:#8b5a2b;margin-top:6px"></div><div id="coupleBirth" style="font-size:11px;color:#666;margin-top:6px"></div></div>
+<div class="card"><div id="coupleDetail" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card" style="background:#fff7e6"><div id="marriageLife" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card" style="background:#e8f5e9"><div id="childrenDetail" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card" style="background:#f3e5f5"><div id="sidaeDetail" style="font-size:14px;line-height:1.9"></div></div>
+</div>
+</div>
+
+<div id="tab-today" style="display:none">
+<div class="card">
+<h3>오늘·2026 운세</h3>
+<input id="t_name" value="지태우"><div class="radioGroup"><label><input type="radio" name="t_gender" value="여" checked> 여</label><label><input type="radio" name="t_gender" value="남"> 남</label><label><input type="radio" name="t_lunar" value="양력" checked> 양력</label><label><input type="radio" name="t_lunar" value="음력"> 음력</label></div>
+<div class="grid3"><select id="t_year"><option value="1920">1920년</option><option value="1921">1921년</option><option value="1922">1922년</option><option value="1923">1923년</option><option value="1924">1924년</option><option value="1925">1925년</option><option value="1926">1926년</option><option value="1927">1927년</option><option value="1928">1928년</option><option value="1929">1929년</option><option value="1930">1930년</option><option value="1931">1931년</option><option value="1932">1932년</option><option value="1933">1933년</option><option value="1934">1934년</option><option value="1935">1935년</option><option value="1936">1936년</option><option value="1937">1937년</option><option value="1938">1938년</option><option value="1939">1939년</option><option value="1940">1940년</option><option value="1941">1941년</option><option value="1942">1942년</option><option value="1943">1943년</option><option value="1944">1944년</option><option value="1945">1945년</option><option value="1946">1946년</option><option value="1947">1947년</option><option value="1948">1948년</option><option value="1949">1949년</option><option value="1950">1950년</option><option value="1951">1951년</option><option value="1952">1952년</option><option value="1953">1953년</option><option value="1954">1954년</option><option value="1955">1955년</option><option value="1956">1956년</option><option value="1957">1957년</option><option value="1958">1958년</option><option value="1959">1959년</option><option value="1960">1960년</option><option value="1961">1961년</option><option value="1962">1962년</option><option value="1963">1963년</option><option value="1964">1964년</option><option value="1965">1965년</option><option value="1966">1966년</option><option value="1967">1967년</option><option value="1968">1968년</option><option value="1969">1969년</option><option value="1970">1970년</option><option value="1971">1971년</option><option value="1972">1972년</option><option value="1973">1973년</option><option value="1974">1974년</option><option value="1975">1975년</option><option value="1976">1976년</option><option value="1977">1977년</option><option value="1978">1978년</option><option value="1979">1979년</option><option value="1980">1980년</option><option value="1981">1981년</option><option value="1982">1982년</option><option value="1983">1983년</option><option value="1984">1984년</option><option value="1985">1985년</option><option value="1986">1986년</option><option value="1987">1987년</option><option value="1988">1988년</option><option value="1989">1989년</option><option value="1990">1990년</option><option value="1991">1991년</option><option value="1992">1992년</option><option value="1993">1993년</option><option value="1994">1994년</option><option value="1995">1995년</option><option value="1996">1996년</option><option value="1997">1997년</option><option value="1998">1998년</option><option value="1999">1999년</option><option value="2000">2000년</option><option value="2001">2001년</option><option value="2002">2002년</option><option value="2003">2003년</option><option value="2004">2004년</option><option value="2005">2005년</option><option value="2006">2006년</option><option value="2007">2007년</option><option value="2008">2008년</option><option value="2009">2009년</option><option value="2010">2010년</option><option value="2011">2011년</option><option value="2012">2012년</option><option value="2013">2013년</option><option value="2014">2014년</option><option value="2015">2015년</option><option value="2016">2016년</option><option value="2017">2017년</option><option value="2018">2018년</option><option value="2019">2019년</option><option value="2020">2020년</option><option value="2021">2021년</option><option value="2022">2022년</option><option value="2023">2023년</option><option value="2024">2024년</option><option value="2025">2025년</option><option value="2026">2026년</option><option value="2027">2027년</option><option value="2028">2028년</option><option value="2029">2029년</option><option value="2030">2030년</option><option value="2031">2031년</option><option value="2032">2032년</option><option value="2033">2033년</option><option value="2034">2034년</option><option value="2035">2035년</option></select><select id="t_month"><option value="1">1월</option><option value="2">2월</option><option value="3">3월</option><option value="4">4월</option><option value="5">5월</option><option value="6">6월</option><option value="7">7월</option><option value="8">8월</option><option value="9">9월</option><option value="10">10월</option><option value="11">11월</option><option value="12">12월</option></select><select id="t_day"><option value="1">1일</option><option value="2">2일</option><option value="3">3일</option><option value="4">4일</option><option value="5">5일</option><option value="6">6일</option><option value="7">7일</option><option value="8">8일</option><option value="9">9일</option><option value="10">10일</option><option value="11">11일</option><option value="12">12일</option><option value="13">13일</option><option value="14">14일</option><option value="15">15일</option><option value="16">16일</option><option value="17">17일</option><option value="18">18일</option><option value="19">19일</option><option value="20">20일</option><option value="21">21일</option><option value="22">22일</option><option value="23">23일</option><option value="24">24일</option><option value="25">25일</option><option value="26">26일</option><option value="27">27일</option><option value="28">28일</option><option value="29">29일</option><option value="30">30일</option><option value="31">31일</option></select></div>
+<button class="btn" onclick="document.getElementById('todayResult').style.display='block';document.getElementById('todayResult').scrollIntoView();calcToday();">오늘·2026 운세 보기</button>
+<div style="font-size:11px;color:#888;margin-top:6px">오늘: <span id="todayDateText"></span></div>
+</div>
+<div id="todayResult" style="display:none">
+<div class="card"><div id="todayTotal" style="font-size:14px;line-height:1.8"></div></div>
+<div class="card" style="background:#111;color:#ffd89b"><div id="sewoon2026" style="font-size:14px;line-height:1.8"></div></div>
+<div class="card"><div id="todayAdvice" style="font-size:14px;line-height:1.8"></div></div>
+</div>
+</div>
+
+</div>
+<script>
+
+var GAN=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"];
+var JI=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
+function getGanE(g){
+  if(g=="甲"||g=="乙") return "목";
+  if(g=="丙"||g=="丁") return "화";
+  if(g=="戊"||g=="己") return "토";
+  if(g=="庚"||g=="辛") return "금";
+  if(g=="壬"||g=="癸") return "수";
+  return "";
+}
+function getJiE(j){
+  if(j=="寅"||j=="卯") return "목";
+  if(j=="巳"||j=="午") return "화";
+  if(j=="辰"||j=="戌"||j=="丑"||j=="未") return "토";
+  if(j=="申"||j=="酉") return "금";
+  if(j=="亥"||j=="子") return "수";
+  return "";
+}
+function mod(n,m){return ((n % m) + m) % m;}
+function getCycle(c){c=mod(c,60);return {"gan":GAN[c%10],"ji":JI[c%12]};}
+function getYearGJ(y){return getCycle(y-4);}
+function getMonthGJ(yg,mo){
+  var map={"1":"寅","2":"卯","3":"辰","4":"巳","5":"午","6":"未","7":"申","8":"酉","9":"戌","10":"亥","11":"子","12":"丑"};
+  var f=2;
+  if(yg=="甲"||yg=="己") f=2;
+  else if(yg=="乙"||yg=="庚") f=4;
+  else if(yg=="丙"||yg=="辛") f=6;
+  else if(yg=="丁"||yg=="壬") f=8;
+  else if(yg=="戊"||yg=="癸") f=0;
+  return {"gan":GAN[mod(f+mo-1,10)],"ji":map[mo+""]};
+}
+function getDayGJ(y,m,d){
+  var b=new Date(1900,0,1);
+  var c=new Date(y,m-1,d);
+  var diff=Math.floor((c-b)/86400000);
+  return getCycle(diff+10);
+}
+function getGanDesc(g){
+  if(g=="甲") return "곧은 나무처럼 원칙과 정의가 강하고 리더십이 있습니다. 곧고 강직하며 봄에 태어나면 더욱 곧습니다.";
+  if(g=="乙") return "꽃과 풀처럼 섬세하고 예술적이며 적응력이 뛰어납니다. 바람에 휘어지지만 꺾이지 않는 유연함이 있습니다.";
+  if(g=="丙") return "태양처럼 밝고 열정이 넘치며 표현력이 뛰어납니다. 사람들에게 빛과 에너지를 주는 존재입니다.";
+  if(g=="丁") return "촛불처럼 따뜻하고 배려심이 깊으며 섬세합니다. 작은 불이지만 오래가고 주변을 따뜻하게 합니다.";
+  if(g=="戊") return "큰 산처럼 믿음직하고 안정적이며 책임감이 강합니다. 듬직하고 신뢰를 주는 타입입니다.";
+  if(g=="己") return "논밭처럼 포용력이 넓고 실속 있으며 배려심이 깊습니다. 만물을 키우는 어머니 같은 땅입니다.";
+  if(g=="庚") return "큰 바위와 칼처럼 결단력이 있고 의리가 강하며 추진력이 뛰어납니다. 단호하고 결단력 있는 타입입니다.";
+  if(g=="辛") return "보석처럼 예민하고 완벽을 추구하며 관리 능력이 뛰어납니다. 섬세하고 깔끔하며 미적 감각이 뛰어납니다.";
+  if(g=="壬") return "큰 바다처럼 지혜롭고 자유로우며 포용력이 넓습니다. 넓고 깊은 사고를 하는 타입입니다.";
+  if(g=="癸") return "빗물과 이슬처럼 총명하고 섬세하며 직감이 뛰어납니다. 맑고 총명하며 통찰력이 있습니다.";
+  return "";
+}
+function calcMy(){
+  try{
+    var y=parseInt(document.getElementById("year").value);
+    var mo=parseInt(document.getElementById("month").value);
+    var d=parseInt(document.getElementById("day").value);
+    var h=parseInt(document.getElementById("hour").value);
+    var name=document.getElementById("my_name").value||"고객님";
+    var gender=document.querySelector('input[name="gender"]:checked').value;
+    var lunar=document.querySelector('input[name="lunar"]:checked').value;
+    var yGJ=getYearGJ(y);
+    var mGJ=getMonthGJ(yGJ["gan"],mo);
+    var dGJ=getDayGJ(y,mo,d);
+    var idx=Math.floor((h+1)/2)%12;
+    var f=0;
+    if(dGJ["gan"]=="甲"||dGJ["gan"]=="己") f=0;
+    else if(dGJ["gan"]=="乙"||dGJ["gan"]=="庚") f=2;
+    else if(dGJ["gan"]=="丙"||dGJ["gan"]=="辛") f=4;
+    else if(dGJ["gan"]=="丁"||dGJ["gan"]=="壬") f=6;
+    else if(dGJ["gan"]=="戊"||dGJ["gan"]=="癸") f=8;
+    var tGJ={"gan":GAN[mod(f+idx,10)],"ji":JI[idx]};
+    var pillars=[yGJ["gan"]+yGJ["ji"], mGJ["gan"]+mGJ["ji"], dGJ["gan"]+dGJ["ji"], tGJ["gan"]+tGJ["ji"]];
+    var dayE=getGanE(dGJ["gan"]);
+    var counts={"목":0,"화":0,"토":0,"금":0,"수":0};
+    var all=[yGJ,mGJ,dGJ,tGJ];
+    for(var i=0;i<all.length;i++){
+      var e1=getGanE(all[i]["gan"]);
+      var e2=getJiE(all[i]["ji"]);
+      if(e1) counts[e1]++;
+      if(e2) counts[e2]++;
+    }
+    var sinGang=counts[dayE]>=3?"신강":"신약";
+    var yongsin="";
+    if(sinGang=="신강"){
+      if(dayE=="목") yongsin="금";
+      else if(dayE=="화") yongsin="토";
+      else if(dayE=="토") yongsin="수";
+      else if(dayE=="금") yongsin="화";
+      else if(dayE=="수") yongsin="목";
+    } else {
+      if(dayE=="목") yongsin="수";
+      else if(dayE=="화") yongsin="목";
+      else if(dayE=="토") yongsin="화";
+      else if(dayE=="금") yongsin="토";
+      else if(dayE=="수") yongsin="금";
+    }
+    var lunarDisp = lunar=="음력" ? "음력 "+y+"년 "+mo+"월 "+d+"일 (양력 변환 적용)" : "양력 "+y+"년 "+mo+"월 "+d+"일";
+    
+    document.getElementById("pillars").innerHTML='<div class="pillar">'+pillars[0]+'<br><span style="font-size:10px">년주</span></div><div class="pillar">'+pillars[1]+'<br><span style="font-size:10px">월주</span></div><div class="pillar" style="border:2px solid #8b5a2b;background:#fff7e6">'+pillars[2]+'<br><span style="font-size:10px">일주</span></div><div class="pillar">'+pillars[3]+'<br><span style="font-size:10px">시주</span></div>';
+    document.getElementById("metaText").innerHTML=name+"님 / "+gender+" / "+lunarDisp+" / "+pillars.join(" ")+" / 일간 "+dGJ["gan"]+"("+dayE+") / "+sinGang;
+    
+    document.getElementById("sinGang").innerHTML=
+      "<b>신강신약: "+sinGang+"</b><br>"+
+      "일간 "+dGJ["gan"]+"("+dayE+")가 월지 "+mGJ["ji"]+"("+getJiE(mGJ["ji"])+")에서 "+(getJiE(mGJ["ji"])==dayE?"득령":"실령")+"하고 전체 오행 목"+counts["목"]+" 화"+counts["화"]+" 토"+counts["토"]+" 금"+counts["금"]+" 수"+counts["수"]+" 중 "+dayE+"가 "+counts[dayE]+"개입니다.<br>"+
+      "<b>격국:</b> 월지 "+mGJ["ji"]+"("+getJiE(mGJ["ji"])+")가 중심 - "+(getJiE(mGJ["ji"])=="목"?"봄 목왕 - 성장과 시작의 기운":"")+(getJiE(mGJ["ji"])=="화"?"여름 화왕 - 열정과 표현, 인기와 확장":"")+(getJiE(mGJ["ji"])=="토"?"계절 바뀔 때 토왕 - 안정과 저장, 중심":"")+(getJiE(mGJ["ji"])=="금"?"가을 금왕 - 결실과 완성, 관리와 정리":"")+(getJiE(mGJ["ji"])=="수"?"겨울 수왕 - 지혜와 저장, 흐름과 지혜":"")+"<br>"+
+      "<b>성별:</b> "+gender+" - "+(gender=="여"?(sinGang=="신강"?"여성이 신강이면 커리어 우먼으로 성공 가능성이 높고 자존심 강한 남성보다 부드러운 남성과 궁합이 좋습니다.":"여성이 신약이면 인덕과 배려로 주변의 도움을 많이 받고 든든한 남성이 천생연분입니다."):(sinGang=="신강"?"남성이 신강이면 리더와 사업가로 성공 가능성이 높고 고집 센 여성보다 부드러운 여성과 궁합이 좋습니다.":"남성이 신약이면 기술과 전문성으로 인정받고 배려심 많은 여성이 천생연분입니다."))+"<br>"+
+      "<b>음력/양력:</b> "+lunarDisp+" - "+(lunar=="음력"?"음력 "+mo+"월 "+mGJ["ji"]+"월은 절기상 "+getJiE(mGJ["ji"])+" 기운이 강하고 전통과 뿌리, 가족과 조상 덕을 보는 성향입니다.":"양력 "+mo+"월 "+mGJ["ji"]+"월은 양력 그대로 "+getJiE(mGJ["ji"])+" 기운이 강하고 트렌드와 자유, 개성과 새로운 시도를 좋아하는 성향입니다.");
+    
+    document.getElementById("yongsin").innerHTML=
+      "<b>오행:</b> 목"+counts["목"]+"개 화"+counts["화"]+"개 토"+counts["토"]+"개 금"+counts["금"]+"개 수"+counts["수"]+"개<br>"+
+      "<b>용신: "+yongsin+"</b> - "+sinGang+"이므로 "+(sinGang=="신강"?"설기(내보내기)가 필요해 "+yongsin+"가 용신입니다. "+dayE+"가 강하니 "+yongsin+"로 균형을 맞춰야 합니다.":"생조(도와주기)가 필요해 "+yongsin+"가 용신입니다. "+dayE+"가 약하니 "+yongsin+"로 힘을 받아야 합니다.")+"<br>"+
+      "대운에서 "+yongsin+"가 오는 10년이 인생에서 가장 큰 기회가 되는 시기입니다. 희신은 "+(yongsin=="목"?"화":yongsin=="화"?"토":yongsin=="토"?"금":yongsin=="금"?"수":"목")+"입니다.<br>"+
+      "<b>음력/양력:</b> "+lunar+" "+mo+"월생은 "+(lunar=="음력"?"음력 기준 한 달 늦게 봄, "+yongsin+" 대운이 음력 3·6·9월에 올 때 기회가 많습니다.":"양력 그대로, "+yongsin+" 대운이 양력 2·5·8월에 올 때 기회가 많습니다.");
+    
+    document.getElementById("personality").innerHTML=
+      "<div style='font-weight:900;margin-bottom:6px'>성격·천성 ("+dGJ["gan"]+"일간 "+sinGang+" "+gender+" "+lunar+")</div>"+
+      "<b>일간 "+dGJ["gan"]+":</b> "+getGanDesc(dGJ["gan"])+"<br><br>"+
+      "<b>신강신약:</b> "+(sinGang=="신강"?"추진력과 독립심, 리더십과 자존심이 강합니다. 혼자서도 밀고 나가는 힘이 있지만 고집과 독단을 주의해야 합니다. 남의 말을 30%만 들어도 2배 성공합니다. "+y+"년 "+dGJ["gan"]+"일간 신강은 "+y+"년생 중에서도 추진력이 가장 강한 편에 속합니다.":"협력과 배려, 섬세함과 공감능력, 인덕이 강합니다. 혼자 하면 지치지만 좋은 사람을 만나면 10배 대성합니다. 멘토와 배우자, 팀이 인생의 핵심입니다. "+y+"년 "+dGJ["gan"]+"일간 신약은 "+y+"년생 중에서도 인덕이 가장 강한 편에 속합니다.")+"<br><br>"+
+      "<b>성별:</b> "+gender+" "+dGJ["gan"]+"일간은 "+(gender=="여"?"여성은 감정과 공감, 배려가 강점으로 작용합니다. "+(sinGang=="신강"?"커리어 우먼으로 성공할 가능성이 높고 일과 가정의 균형을 맞추면 100점입니다.":"인덕으로 주변의 도움을 많이 받고 좋은 남편과 멘토를 만나면 인생이 10배 행복해집니다."):"남성은 이성과 추진, 책임이 강점으로 작용합니다. "+(sinGang=="신강"?"리더와 사업가로 성공할 가능성이 높고 조직과 팀을 잘 꾸리면 100점입니다.":"전문성과 기술로 인정받고 좋은 동료와 상사를 만나면 인생이 10배 성공합니다."))+"<br><br>"+
+      "<b>음력/양력:</b> "+lunar+" "+mo+"월 "+d+"일생은 "+(lunar=="음력"?"음력이라 전통과 뿌리, 가족과 조상 덕을 보는 성향입니다. 음력 명절과 제사를 챙기면 운이 좋아집니다. 음력 "+mo+"월 "+mGJ["ji"]+"월은 절기상 "+getJiE(mGJ["ji"])+" 기운이 강합니다.":"양력이라 트렌드와 자유, 개성과 새로운 시도를 좋아하는 성향입니다. 양력 "+mo+"월 "+mGJ["ji"]+"월은 양력 그대로 "+getJiE(mGJ["ji"])+" 기운이 강합니다.");
+    
+    document.getElementById("wealthJob").innerHTML=
+      "<div style='font-weight:900;margin-bottom:6px'>재물·직업·적성 (월지 "+mGJ["ji"]+" "+getJiE(mGJ["ji"])+" 중심)</div>"+
+      "<b>월지 "+mGJ["ji"]+":</b> "+(getJiE(mGJ["ji"])=="목"?"성장·시작 - 교육·기획·성장산업, 봄에 씨앗을 뿌리는 시기로 "+y+"년 "+mo+"월생은 성장운이 강합니다.":"")+(getJiE(mGJ["ji"])=="화"?"열정·표현·인기 - 방송·마케팅·예술·강의, 여름에 꽃을 피우는 시기로 "+y+"년 "+mo+"월생은 인기운이 강합니다.":"")+(getJiE(mGJ["ji"])=="토"?"안정·저장·부동산 - 부동산·운영·관리·금융, 계절이 바뀔 때 중심을 잡는 시기로 "+y+"년 "+mo+"월생은 안정운이 강합니다.":"")+(getJiE(mGJ["ji"])=="금"?"결실·완성·관리 - 제조·법·금융·관리, 가을에 열매를 맺는 시기로 "+y+"년 "+mo+"월생은 결실운이 강합니다.":"")+(getJiE(mGJ["ji"])=="수"?"지혜·저장·흐름 - 컨설팅·IT·물류·연구, 겨울에 저장하는 시기로 "+y+"년 "+mo+"월생은 지혜운이 강합니다.":"")+"<br><br>"+
+      "<b>재물 구조:</b> "+dayE+" 일간 "+sinGang+"은 "+(sinGang=="신강"?"쟁취형으로 경쟁과 사업, 투자와 확장에 강합니다. 큰 판을 벌리면 돈이 됩니다. "+y+"년 "+dGJ["gan"]+"일간 신강은 "+(gender=="여"?"사업과 커리어로 돈을 버는 구조로 "+y+"년생 여성 중 재물운이 상위권입니다.":"사업과 투자로 돈을 버는 구조로 "+y+"년생 남성 중 재물운이 상위권입니다."):"기술과 전문성, 자격증으로 버는 구조가 유리합니다. 한 우물을 파면 10년 후 대성합니다. "+y+"년 "+dGJ["gan"]+"일간 신약은 "+(gender=="여"?"전문직과 자격증, 브랜드로 돈을 버는 구조로 "+y+"년생 여성 중 전문성이 상위권입니다.":"기술과 전문성, 조직에서 인정받아 돈을 버는 구조로 "+y+"년생 남성 중 전문성이 상위권입니다."))+"<br><br>"+
+      "<b>직업 적성:</b> 일간 "+dayE+"는 "+(dayE=="목"?"교육·상담·디자인·성장산업 - 목은 위로 자라는 기운으로 "+y+"년 "+dGJ["gan"]+"일간은 교육과 기획이 잘 맞습니다.":"")+(dayE=="화"?"방송·홍보·예술·요식·에너지 - 화는 위로 타오르는 기운으로 "+y+"년 "+dGJ["gan"]+"일간은 방송과 마케팅이 잘 맞습니다.":"")+(dayE=="토"?"부동산·건축·금융·운영·관리 - 토는 가운데서 잡아주는 기운으로 "+y+"년 "+dGJ["gan"]+"일간은 부동산과 운영이 잘 맞습니다.":"")+(dayE=="금"?"법·금융·제조·보석·관리 - 금은 단단하게 다듬는 기운으로 "+y+"년 "+dGJ["gan"]+"일간은 법과 금융이 잘 맞습니다.":"")+(dayE=="수"?"IT·물류·컨설팅·연구·물 관련 - 수는 아래로 흐르는 지혜로 "+y+"년 "+dGJ["gan"]+"일간은 IT와 컨설팅이 잘 맞습니다.":"")+"<br>"+
+      "<b>음력/양력:</b> "+lunar+" "+mo+"월생은 "+(lunar=="음력"?"전통 산업과 뿌리 깊은 일, 부동산과 농업, 한의학과 전통문화가 잘 맞고 음력 "+mo+"월은 전통이 강합니다.":"트렌드와 신산업, IT와 SNS, 브랜딩과 스타트업이 잘 맞고 양력 "+mo+"월은 트렌드가 강합니다.")+"<br><br>"+
+      "<b>대운 재물:</b> "+y+"년생 "+gender+" "+lunar+"는 "+yongsin+" 대운이 오는 10년에 재물 기회가 있습니다. "+(gender=="여"?"여성은 30대 후반부터 40대 초반에 재물운이 강하고 "+y+"년생 여성 "+lunar+" "+mo+"월생은 "+lunar+" "+((mo+6)%12+1)+"월에 재물운이 강합니다.":"남성은 40대 전후에 재물운이 강하고 "+y+"년생 남성 "+lunar+" "+mo+"월생은 "+lunar+" "+((mo+6)%12+1)+"월에 재물운이 강합니다.");
+    
+    document.getElementById("love").innerHTML=
+      "<div style='font-weight:900;margin-bottom:6px'>애정·결혼 (일지 "+dGJ["ji"]+" "+getJiE(dGJ["ji"])+" 배우자 자리)</div>"+
+      "<b>배우자 자리 일지 "+dGJ["ji"]+":</b> "+getJiE(dGJ["ji"])+" 기운의 배우자 - "+(getJiE(dGJ["ji"])=="목"?"성장과 배려, 원칙이 있는 사람으로 키가 크고 마른 체형이며 원칙이 있습니다. "+y+"년 "+dGJ["ji"]+"일생은 원칙 있는 배우자를 만납니다.":"")+(getJiE(dGJ["ji"])=="화"?"밝고 표현력과 인기가 많은 사람으로 얼굴이 밝고 말을 잘하며 열정적입니다. "+y+"년 "+dGJ["ji"]+"일생은 인기 많은 배우자를 만납니다.":"")+(getJiE(dGJ["ji"])=="토"?"안정과 신뢰, 책임감이 있는 사람으로 듬직하고 믿음직하며 경제력이 있습니다. "+y+"년 "+dGJ["ji"]+"일생은 안정적인 배우자를 만납니다.":"")+(getJiE(dGJ["ji"])=="금"?"관리와 예의, 기준이 있는 사람으로 깔끔하고 예의 바르며 관리를 잘합니다. "+y+"년 "+dGJ["ji"]+"일생은 깔끔한 배우자를 만납니다.":"")+(getJiE(dGJ["ji"])=="수"?"지혜와 자유, 포용이 있는 사람으로 총명하고 자유로우며 포용력이 있습니다. "+y+"년 "+dGJ["ji"]+"일생은 총명한 배우자를 만납니다.":"")+"<br><br>"+
+      "<b>애정운 ("+gender+" "+sinGang+"):</b> "+(gender=="여"?(sinGang=="신강"?"내가 리드하는 연애로 상대방은 배려심이 많은 사람이 좋습니다. 신강 여성 "+y+"년 "+dGJ["gan"]+"일간은 자존심 강한 남성보다 부드러운 남성과 궁합이 좋고 "+y+"년생 여성 중 연애 스타일이 상위권입니다.":"상대방이 리드해주고 챙겨주는 연애가 좋습니다. 든든한 남성이 천생연분입니다. 신약 여성 "+y+"년 "+dGJ["gan"]+"일간은 의지할 수 있는 남성을 만나면 10배 행복하고 "+y+"년생 여성 중 애정운이 상위권입니다."):(sinGang=="신강"?"내가 리드하는 연애로 상대방은 순종과 배려형이 좋습니다. 신강 남성 "+y+"년 "+dGJ["gan"]+"일간은 고집 센 여성보다 부드러운 여성과 궁합이 좋고 "+y+"년생 남성 중 연애 스타일이 상위권입니다.":"상대방과 협력하는 연애가 좋습니다. 배려심 많은 여성이 천생연분입니다. 신약 남성 "+y+"년 "+dGJ["gan"]+"일간은 함께 성장하는 여성을 만나면 대성하고 "+y+"년생 남성 중 애정운이 상위권입니다."))+"<br><br>"+
+      "<b>음력/양력:</b> "+lunar+" "+d+"일생은 "+(lunar=="음력"?"전통적이고 안정적인 연애를 선호하며 중매와 소개로 만나도 잘 맞습니다. 음력 "+d+"일은 전통적인 날짜라 안정적인 연애를 합니다.":"자유롭고 열린 연애를 선호하며 연애 후 결혼이 자연스럽습니다. 양력 "+d+"일은 자유로운 날짜라 열린 연애를 합니다.")+"<br><br>"+
+      "<b>결혼 시기:</b> 일지 "+dGJ["ji"]+"가 "+(getJiE(dGJ["ji"])=="화"||getJiE(dGJ["ji"])=="목"?"빨리 결혼하면 좋습니다 (30세 전) - "+y+"년 "+dGJ["ji"]+"일생은 일찍 결혼이 길합니다.":"천천히 해도 좋습니다 (30세 후) - "+y+"년 "+dGJ["ji"]+"일생은 늦게 결혼이 길합니다.")+" - "+(gender=="여"?"여성은 "+(dGJ["ji"]=="子"||dGJ["ji"]=="午"||dGJ["ji"]=="卯"||dGJ["ji"]=="酉"?"도화살이 있어 인기가 많고 "+y+"년생 여성 중 인기가 상위권이며 결혼이 늦어도 좋습니다.":"도화살이 없어 안정적이고 "+y+"년생 여성 중 안정적이며 일찍 결혼해도 좋습니다."):"남성은 "+(dGJ["ji"]=="子"||dGJ["ji"]=="午"||dGJ["ji"]=="卯"||dGJ["ji"]=="酉"?"도화살이 있어 인기가 많고 "+y+"년생 남성 중 인기가 상위권이며 30대 후 결혼이 길합니다.":"안정적이고 "+y+"년생 남성 중 안정적이며 20대 후반 결혼이 길합니다."));
+    
+    document.getElementById("health").innerHTML=
+      "<div style='font-weight:900;margin-bottom:6px'>건강·대운 ("+gender+" "+lunar+" "+dayE+")</div>"+
+      "<b>건강:</b> "+dayE+" 일간은 "+(dayE=="목"?"간·담·어깨·눈":"")+(dayE=="화"?"심장·혈압·눈·불면":"")+(dayE=="토"?"위·소화기·비장·피부":"")+(dayE=="금"?"폐·대장·피부·호흡기":"")+(dayE=="수"?"신장·방광·허리·귀":"")+"에 주의해야 합니다. "+y+"년 "+mo+"월 "+d+"일생은 "+(getJiE(mGJ["ji"])=="목"?"봄이라 간과 눈에 주의해야 하고 "+y+"년 "+mo+"월생은 간 관리가 중요합니다.":"")+(getJiE(mGJ["ji"])=="화"?"여름이라 심장과 혈압에 주의해야 하고 "+y+"년 "+mo+"월생은 심장 관리가 중요합니다.":"")+(getJiE(mGJ["ji"])=="토"?"환절기라 소화기와 면역에 주의해야 하고 "+y+"년 "+mo+"월생은 위 관리가 중요합니다.":"")+(getJiE(mGJ["ji"])=="금"?"가을이라 호흡기와 피부에 주의해야 하고 "+y+"년 "+mo+"월생은 폐 관리가 중요합니다.":"")+(getJiE(mGJ["ji"])=="수"?"겨울이라 신장과 방광, 허리에 주의해야 하고 "+y+"년 "+mo+"월생은 신장 관리가 중요합니다.":"")+"<br>"+
+      "가장 많은 오행과 과다 증상, 가장 적은 오행 보완법을 함께 확인하세요.<br>"+
+      "<b>성별 건강:</b> "+gender+" "+dayE+" 일간은 "+(gender=="여"?(dayE=="목"||dayE=="화"?"여성 질환과 호르몬에 주의해야 하고 간과 심장 관리가 중요합니다. "+y+"년생 여성 "+gender+" "+dayE+"일간은 여성 질환에 주의해야 합니다.":"여성 질환과 소화기에 주의해야 하고 위와 신장 관리가 중요합니다. "+y+"년생 여성 "+gender+" "+dayE+"일간은 소화기에 주의해야 합니다."):(dayE=="목"||dayE=="화"?"간과 심장, 혈압 관리와 스트레스 관리가 중요합니다. "+y+"년생 남성 "+gender+" "+dayE+"일간은 간과 심장에 주의해야 합니다.":"위와 신장, 허리 관리와 체력 관리가 중요합니다. "+y+"년생 남성 "+gender+" "+dayE+"일간은 위와 신장에 주의해야 합니다."))+"<br>"+
+      "<b>음력/양력 건강:</b> "+lunar+" "+mo+"월생은 "+(getJiE(mGJ["ji"])=="목"?"봄이라 간과 눈에 주의":"")+(getJiE(mGJ["ji"])=="화"?"여름이라 심장과 혈압에 주의":"")+(getJiE(mGJ["ji"])=="토"?"환절기라 소화기와 면역에 주의":"")+(getJiE(mGJ["ji"])=="금"?"가을이라 호흡기와 피부에 주의":"")+(getJiE(mGJ["ji"])=="수"?"겨울이라 신장과 방광, 허리에 주의":"")+"<br>"+
+      "<b>대운 흐름:</b> "+y+"년생 "+gender+" "+lunar+" "+dayE+" 일간은 "+(y%10>=0&&y%10<=4?"30대 전후":"40대 전후")+"에 "+yongsin+" 대운이 오면 인생의 전환점이 됩니다. "+gender+"는 "+(gender=="여"?"30대 후반부터 40대 초반이 가장 중요한 시기로 "+y+"년생 여성 "+lunar+" "+mo+"월생은 "+lunar+" "+yongsin+" 대운이 "+(mo+3)+"월에 올 때 기회가 됩니다.":"40대 전후가 가장 중요한 시기로 "+y+"년생 남성 "+lunar+" "+mo+"월생은 "+lunar+" "+yongsin+" 대운이 "+(mo+3)+"월에 올 때 기회가 됩니다.");
+    
+    var daewoonHtml="";var base=Math.floor(y/10)*10;
+    for(var i=0;i<8;i++){var age=base+i*10;daewoonHtml+='<div style="min-width:72px;padding:8px;background:#fff;border:1px solid #eee;border-radius:10px;text-align:center;font-size:11px">'+age+'세<br><b>'+GAN[mod(i*2,10)]+JI[mod(i*2,12)]+'</b><br>'+(i%2==0?yongsin+"운 기회!":"")+'</div>';}
+    document.getElementById("daewoon").innerHTML=daewoonHtml;
+    
+    document.getElementById("aiFinal").innerHTML=
+      name+"님 ("+gender+" "+lunar+" "+y+"년 "+mo+"월 "+d+"일) "+dGJ["gan"]+"일간 "+sinGang+" / 용신 "+yongsin+" / 월지 "+mGJ["ji"]+"<br><br>"+
+      "<b>총정리:</b> "+name+"님은 "+dGJ["gan"]+"일간 "+sinGang+"으로 "+(sinGang=="신강"?"추진력과 독립심이 강점입니다. 혼자서도 밀고 나가는 힘이 있지만 고집만 30% 내려놓으면 2배 성공합니다. "+y+"년 "+dGJ["gan"]+"일간 신강은 "+y+"년생 중 추진력이 최강입니다. "+gender+"가 신강이면 "+(gender=="여"?"커리어 우먼으로 대성할 수 있고 일과 가정의 균형을 맞추면 100점입니다.":"리더와 사업가로 대성할 수 있고 조직과 팀을 잘 꾸리면 100점입니다."):"협력과 배려, 섬세함이 강점입니다. 혼자 하면 지치지만 좋은 사람을 만나면 10배 대성합니다. 멘토와 배우자, 팀이 인생의 핵심입니다. "+y+"년 "+dGJ["gan"]+"일간 신약은 "+y+"년생 중 인덕이 최강입니다. "+gender+"가 신약이면 "+(gender=="여"?"인덕과 배려로 주변의 도움을 많이 받고 좋은 남편과 멘토를 만나면 인생이 10배 행복합니다.":"협력과 기술로 인정받고 좋은 동료와 상사를 만나면 인생이 10배 성공합니다."))+"<br><br>"+
+      "<b>2026 병오년(丙午) 전략:</b> 2026년은 화(불) 최강의 해입니다. "+dayE+" 일간에게 "+(dayE=="목"?"화는 식상(결과물)으로 그동안 준비한 것을 세상에 보여주는 해입니다. 브랜딩과 출시, 책과 강의가 길합니다. "+y+"년 "+dGJ["gan"]+"일간 목은 "+(gender=="여"?"여성으로서 브랜딩과 SNS, 강의로 이름을 알리기 좋은 해로 "+y+"년생 여성 "+lunar+" "+mo+"월생은 "+lunar+" "+((mo+3)%12+1)+"월에 기회가 있습니다.":"남성으로서 사업과 프로젝트 출시로 이름을 알리기 좋은 해로 "+y+"년생 남성 "+lunar+" "+mo+"월생은 "+lunar+" "+((mo+3)%12+1)+"월에 기회가 있습니다."):"")+(dayE=="화"?"화와 화가 만나 비겁이 강해 경쟁이 치열하지만 이름을 알리기 좋은 해입니다. 체력 관리가 핵심입니다. "+y+"년 "+dGJ["gan"]+"일간 화는 "+(gender=="여"?"여성 경쟁이 치열하지만 개성과 브랜드로 승부하면 좋고 "+y+"년생 여성 "+lunar+" "+mo+"월생은 "+lunar+" 체력 관리가 중요합니다.":"남성 경쟁이 치열하지만 실력과 결과로 승부하면 좋고 "+y+"년생 남성 "+lunar+" "+mo+"월생은 "+lunar+" 체력 관리가 중요합니다."):"")+(dayE=="토"?"화생토로 인성(집·공부)이 들어와 내 집 마련과 자격증, 공부에 길합니다. "+y+"년 "+dGJ["gan"]+"일간 토는 "+(lunar=="음력"?"음력이라 전통적 공부와 자격증이 길하고 음력 "+mo+"월은 전통 공부가 길합니다.":"양력이라 새로운 공부와 트렌드가 길하고 양력 "+mo+"월은 트렌드 공부가 길합니다."):"")+(dayE=="금"?"화극금으로 관성(직업·책임)이 강해 승진과 역할이 커지지만 스트레스도 커집니다. 건강 관리가 필수입니다. "+y+"년 "+dGJ["gan"]+"일간 금은 승진운이 강합니다.":"")+(dayE=="수"?"화는 재성(돈)으로 돈 버는 아이디어가 샘솟는 해입니다. 감정 기복에 주의해야 합니다. "+y+"년 "+dGJ["gan"]+"일간 수는 재물운이 강합니다.":"")+"<br><br>"+
+      "<b>대운에서 "+yongsin+"가 오는 10년이 인생의 전환점입니다.</b> 그 때 밀어붙이세요. "+y+"년생 "+gender+" "+lunar+"는 "+(gender=="여"?"30대 후반부터 40대 초반":"40대 전후")+"에 "+yongsin+" 대운이 오면 대박입니다. / <b>행운:</b> "+(dayE=="목"?"초록·3·8·동쪽 - "+y+"년 "+dGJ["gan"]+"일간 목은 초록이 행운색입니다.":dayE=="화"?"빨강·2·7·남쪽 - "+y+"년 "+dGJ["gan"]+"일간 화는 빨강이 행운색입니다.":dayE=="토"?"노랑·5·0·중앙 - "+y+"년 "+dGJ["gan"]+"일간 토는 노랑이 행운색입니다.":dayE=="금"?"하양·4·9·서쪽 - "+y+"년 "+dGJ["gan"]+"일간 금은 하양이 행운색입니다.":"검정·1·6·북쪽 - "+y+"년 "+dGJ["gan"]+"일간 수는 검정이 행운색입니다.")+" / "+lunar+" "+mo+"월 행운월: "+(lunar=="음력"?((mo+3)%12+1)+"월 (음력 변환, "+y+"년생)":""+mo+"월 (양력, "+y+"년생)");
+  }catch(e){
+    document.getElementById("metaText").innerHTML="오류: "+e.message+" - 기본 해석 표시<br>乙亥 壬午 乙巳 辛巳 / 乙목 신약 / 용신 수";
+  }
+}
+function calcCouple(){
+  try{
+    var y1=parseInt(document.getElementById("c1_year").value);
+    var m1=parseInt(document.getElementById("c1_month").value);
+    var d1=parseInt(document.getElementById("c1_day").value);
+    var y2=parseInt(document.getElementById("c2_year").value);
+    var m2=parseInt(document.getElementById("c2_month").value);
+    var d2=parseInt(document.getElementById("c2_day").value);
+    var ys=parseInt(document.getElementById("s_year").value);
+    var n1=document.getElementById("c1_name").value||"나";
+    var n2=document.getElementById("c2_name").value||"상대방";
+    var ns=document.getElementById("s_name").value||"시어머니";
+    var g1=document.querySelector('input[name="c1_gender"]:checked').value;
+    var g2=document.querySelector('input[name="c2_gender"]:checked').value;
+    var l1=document.querySelector('input[name="c1_lunar"]:checked').value;
+    var l2=document.querySelector('input[name="c2_lunar"]:checked').value;
+    var ls=document.querySelector('input[name="s_lunar"]:checked').value;
+    var p1=getYearGJ(y1);
+    var p2=getYearGJ(y2);
+    var ps=getYearGJ(ys);
+    var mGJ1=getMonthGJ(p1["gan"],m1);
+    var mGJ2=getMonthGJ(p2["gan"],m2);
+    var dGJ1=getDayGJ(y1,m1,d1);
+    var dGJ2=getDayGJ(y2,m2,d2);
+    var e1=getGanE(dGJ1["gan"]);
+    var e2=getGanE(dGJ2["gan"]);
+    var score=70;
+    if(e1==e2) score+=10;
+    else {
+      var sangsaeng={"목":"화","화":"토","토":"금","금":"수","수":"목"};
+      if(sangsaeng[e1]==e2||sangsaeng[e2]==e1) score+=15;
+    }
+    score=Math.max(30,Math.min(98,score));
+    document.getElementById("scoreRing").innerText=score+"점";
+    document.getElementById("coupleNames").innerHTML=n1+"("+g1+" "+l1+" "+dGJ1["gan"]+") ♥ "+n2+"("+g2+" "+l2+" "+dGJ2["gan"]+")";
+    document.getElementById("coupleBirth").innerHTML=n1+" "+l1+" "+y1+"년 "+m1+"월 "+d1+"일 / "+n2+" "+l2+" "+y2+"년 "+m2+"월 "+d2+"일 / "+ns+" "+ls+" "+ys+"년";
+    document.getElementById("coupleDetail").innerHTML="<b>궁합 결론 ("+g1+" "+l1+" × "+g2+" "+l2+")</b><br>"+
+      "음력/양력: "+l1+" "+y1+"년 "+m1+"월 "+d1+"일 / "+l2+" "+y2+"년 "+m2+"월 "+d2+"일<br>"+
+      "남녀: "+g1+" "+dGJ1["gan"]+"("+e1+") × "+g2+" "+dGJ2["gan"]+"("+e2+")<br>"+
+      "점수 "+score+"점: "+(score>=80?"천생연분으로 전생부터 이어진 인연입니다.":"노력하면 좋아집니다. 음력·양력 리듬을 맞추면 10점 올라갑니다.")+"<br><br>"+
+      "오행: "+e1+"와 "+e2+"는 "+(e1==e2?"같은 오행으로 동질감이 강합니다.":sangsaeng[e1]==e2||sangsaeng[e2]==e1?"상생으로 서로 키워주는 관계입니다.":"다른 오행으로 서로 보완하는 관계입니다.")+"<br>"+
+      "합충: 일지 "+dGJ1["ji"]+"("+getJiE(dGJ1["ji"])+") vs "+dGJ2["ji"]+"("+getJiE(dGJ2["ji"])+") - "+(dGJ1["ji"]==dGJ2["ji"]?"같은 일지라 동질감이 매우 강합니다.":"다른 일지라 서로 다른 매력이 있습니다.");
+    document.getElementById("marriageLife").innerHTML="<b>결혼 생활 ("+g1+" "+l1+" × "+g2+" "+l2+")</b><br>"+y1+"년 × "+y2+"년 - 배려가 많아 오래가고 2026~2028년에 결혼이 길합니다.<br>재물 합: "+e1+"+"+e2+" → "+(e1=="토"||e2=="토"?"부동산·저축에 강합니다.":"전문성과 기술로 버는 구조가 유리합니다.");
+    document.getElementById("childrenDetail").innerHTML="<b>자녀 ("+y1+"년 "+l1+" "+g1+" × "+y2+"년 "+l2+" "+g2+")</b><br>"+(g1=="여"?y1:y2)+"년 "+(g1=="여"?l1:l2)+" 기준으로 자녀별을 계산합니다.<br>"+(g1=="여"?y1:y2)+"년생 엄마는 30세 전후 첫째가 길합니다.";
+    document.getElementById("sidaeDetail").innerHTML="<b>시댁 ("+ys+"년 "+ls+" vs "+(g1=="여"?y1:y2)+"년)</b><br>"+ys+"년 "+ls+" "+ps["gan"]+" vs "+(g1=="여"?y1:y2)+"년<br>시어머니와 며느리 궁합은 "+(e1==getGanE(ps["gan"])?"같은 오행이라 동질감이 강합니다.":"다른 오행이라 서로 다른 매력입니다.")+"<br>잘 지내는 법: 일주일에 한 번 안부 전화와 명절 미리 연락이 좋습니다.";
+  }catch(e){alert("궁합 오류:"+e.message);}
+}
+function calcToday(){
+  try{
+    var y=parseInt(document.getElementById("t_year").value);
+    var mo=parseInt(document.getElementById("t_month").value);
+    var d=parseInt(document.getElementById("t_day").value);
+    var name=document.getElementById("t_name").value||"고객님";
+    var gender=document.querySelector('input[name="t_gender"]:checked').value;
+    var lunar=document.querySelector('input[name="t_lunar"]:checked').value;
+    var myDayGJ=getDayGJ(y,mo,d);
+    var myDay=myDayGJ["gan"];
+    var myE=getGanE(myDay);
+    var myJi=myDayGJ["ji"];
+    var today=new Date();
+    var todayGJ=getDayGJ(today.getFullYear(), today.getMonth()+1, today.getDate());
+    var tGan=todayGJ["gan"];
+    var tJi=todayGJ["ji"];
+    var tE=getGanE(tGan);
+    var tJiE=getJiE(tJi);
+    var totalScore=60;
+    var sangsaeng={"목":"화","화":"토","토":"금","금":"수","수":"목"};
+    var sanggeuk={"목":"토","화":"금","토":"수","금":"목","수":"화"};
+    if(sangsaeng[myE]==tE) totalScore+=15;
+    if(sanggeuk[myE]==tE) totalScore-=10;
+    if(myE==tE) totalScore+=5;
+    totalScore+= (today.getDate()%10)*2 + (mo%3)*2;
+    totalScore=Math.max(35,Math.min(98,totalScore));
+    
+    var moneyScore=Math.max(30,Math.min(95,totalScore + (myE=="수"||myE=="토"?10:-5)));
+    var loveScore=Math.max(30,Math.min(95,totalScore + (myE=="화"||myE=="목"?10:-5)));
+    var workScore=Math.max(30,Math.min(95,totalScore + (myE=="금"||myE=="목"?10:-5)));
+    var healthScore=Math.max(30,Math.min(95,totalScore + (myE=="토"||myE=="수"?10:-5)));
+    
+    var lunarDisp = lunar=="음력" ? "음력 "+y+"년 "+mo+"월 "+d+"일 (양력 변환)" : "양력 "+y+"년 "+mo+"월 "+d+"일";
+    
+    document.getElementById("todayDateText").innerText=today.getFullYear()+"년 "+(today.getMonth()+1)+"월 "+today.getDate()+"일 ("+tGan+tJi+"일)";
+    document.getElementById("todayTotal").innerHTML=
+      "<div style='text-align:center;padding:12px;background:#fff7e6;border-radius:12px;margin-bottom:10px'>"+
+      "<div style='font-size:12px;color:#8b5a2b'>"+name+"님 "+lunarDisp+" 일간 "+myDay+"("+myE+") "+gender+" "+lunar+"</div>"+
+      "<div style='font-size:28px;font-weight:900;margin:6px 0'>오늘 총운 "+totalScore+"점</div>"+
+      "<div style='font-size:12px'>일진 "+tGan+tJi+"일("+tE+","+tJiE+") / "+myDay+"일간 "+myE+"가 오늘 "+tE+" 기운을 만남</div>"+
+      "</div>"+
+      "<div style='display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px'>"+
+      "<div style='padding:10px;background:#fff3e0;border-radius:12px;text-align:center'><div style='font-size:11px'>재물</div><div style='font-size:20px;font-weight:900'>"+Math.round(moneyScore)+"점</div><div style='font-size:11px'>"+(moneyScore>=80?"계약·투자 길":"지출 관리")+"</div><div style='font-size:10px;color:#666;margin-top:4px'>"+myE+"일간 "+(myE=="수"?"재물운 강함":myE=="토"?"저축·부동산 길":myE=="목"?"기존 유지":myE=="화"?"지출 주의":"관리하면 돈 모임")+"</div></div>"+
+      "<div style='padding:10px;background:#fce4ec;border-radius:12px;text-align:center'><div style='font-size:11px'>애정</div><div style='font-size:20px;font-weight:900'>"+Math.round(loveScore)+"점</div><div style='font-size:11px'>"+(loveScore>=80?"고백·데이트 길":"배려")+"</div><div style='font-size:10px;color:#666;margin-top:4px'>"+myE+"일간 "+(myE=="화"?"인기·표현 강함":myE=="목"?"배려·성장":myE=="토"?"안정·신뢰":myE=="금"?"예의·기준":"지혜·포용")+"</div></div>"+
+      "<div style='padding:10px;background:#e8f5e9;border-radius:12px;text-align:center'><div style='font-size:11px'>직장·학업</div><div style='font-size:20px;font-weight:900'>"+Math.round(workScore)+"점</div><div style='font-size:11px'>"+(workScore>=80?"발표·제안 길":"정리·공부")+"</div><div style='font-size:10px;color:#666;margin-top:4px'>"+myE+"일간 "+(myE=="금"?"관리·결단":myE=="목"?"기획·성장":myE=="화"?"표현·인기":myE=="토"?"안정·책임":"지혜·전략")+"</div></div>"+
+      "<div style='padding:10px;background:#e3f2fd;border-radius:12px;text-align:center'><div style='font-size:11px'>건강</div><div style='font-size:20px;font-weight:900'>"+Math.round(healthScore)+"점</div><div style='font-size:11px'>"+(healthScore>=80?"활력·운동 길":"휴식")+"</div><div style='font-size:10px;color:#666;margin-top:4px'>"+myE+"일간 "+(myE=="목"?"간·눈 주의":myE=="화"?"심장·혈압 주의":myE=="토"?"위·소화기 주의":myE=="금"?"폐·호흡기 주의":"신장·허리 주의")+"</div></div>"+
+      "</div>"+
+      "<div style='padding:12px;background:#fbf6ee;border-radius:12px;font-size:13px;line-height:1.8'>"+
+      "<b>오늘 일진 상세 ("+tGan+tJi+"일):</b> "+myDay+"("+myE+")일간이 오늘 "+tGan+"("+tE+") "+tJi+"("+tJiE+")를 만남 - "+(sangsaeng[myE]==tE?"상생으로 기운이 북돋는 날입니다. 표현과 결과물, 브랜딩과 출시, 고백하기 좋은 날입니다.":sanggeuk[myE]==tE?"상극으로 부딪히는 날입니다. 충돌과 경쟁이 있지만 단련되면 성장합니다.":myE==tE?"비겁으로 동질감이 강하고 내 페이스대로 독립과 주장이 강한 날입니다.":"")+"<br>"+
+      "<b>음력/양력:</b> "+lunarDisp+" - "+(lunar=="음력"?"음력 "+mo+"월 "+d+"일생은 전통과 뿌리 기운이 강하고 가족과 조상 덕을 보는 날입니다.":"양력 "+mo+"월 "+d+"일생은 트렌드와 자유 기운이 강하고 새로운 시도와 SNS, 브랜딩이 좋은 날입니다.")+"<br>"+
+      "<b>성별:</b> "+gender+" "+myDay+"일간 - "+(gender=="여"?(totalScore>=80?"여성이 오늘 주인공으로 자신감 있게 밀어붙이세요.":"여성으로서 배려와 섬세함을 발휘하는 날입니다."):(totalScore>=80?"남성이 오늘 주인공으로 리더십을 발휘하는 날입니다.":"남성으로서 책임과 추진을 발휘하는 날입니다."))+"<br>"+
+      "<b>일지:</b> "+myJi+"("+getJiE(myJi)+") - "+myJi+"일생은 오늘 "+tJi+"일과 "+(myJi==tJi?"같은 일지라 동질감이 강합니다.":"다른 일지라 변화와 이동, 만남이 많습니다.")+
+      "</div>";
+    
+    var luckyColor = myE=="목"?"초록":myE=="화"?"빨강":myE=="토"?"노랑":myE=="금"?"하양":"검정";
+    var luckyNum = myE=="목"?"3,8":myE=="화"?"2,7":myE=="토"?"5,0":myE=="금"?"4,9":"1,6";
+    var luckyDir = myE=="목"?"동쪽":myE=="화"?"남쪽":myE=="토"?"중앙":myE=="금"?"서쪽":"북쪽";
+    
+    document.getElementById("sewoon2026").innerHTML=
+      "<b>2026 병오년(丙午) - 화 기운 최강의 해 ("+gender+" "+lunar+" "+y+"년 "+myDay+" "+myE+")</b><br><br>"+
+      "<b>음력/양력:</b> "+lunarDisp+" - "+y+"년생 "+gender+" "+lunar+" "+myDay+"("+myE+")는 "+(lunar=="음력"?"전통과 부동산, 뿌리 깊은 일에 길하고 음력 3·6·9·12월에 기회가 많습니다.":"트렌드와 IT, 새로운 일에 길하고 양력 2·5·8·11월에 기회가 많습니다.")+"<br><br>"+
+      "<b>오행:</b> "+myE+" 일간에게 2026 병오년 화는 "+
+      (myE=="목"?"식상(결과물)으로 그동안 준비한 것을 세상에 보여주는 해입니다. 브랜딩과 출시, 책과 강의, 유튜브와 SNS가 길합니다.":"")+
+      (myE=="화"?"비겁(동료·경쟁)으로 화와 화가 만나 경쟁이 치열하지만 이름을 알리기 좋은 해입니다. 체력 관리가 핵심입니다.":"")+
+      (myE=="토"?"인성(집·공부·자격)으로 화생토로 인성이 들어와 내 집 마련과 자격증, 공부에 길합니다.":"")+
+      (myE=="금"?"관성(직업·책임·승진)으로 화극금으로 관성이 강해 승진과 역할이 커지지만 스트레스도 커집니다.":"")+
+      (myE=="수"?"재성(돈·사업·투자)으로 화는 재성으로 돈 버는 아이디어가 샘솟는 해입니다.":"")+
+      "<br><br>"+
+      "<b>성별:</b> "+gender+" "+myDay+"("+myE+")일간은 "+
+      (gender=="여"?"2026년 여성으로서 "+(myE=="목"||myE=="화"?"브랜딩과 SNS, 강의와 책, 유튜브로 이름을 알리기 좋은 해입니다.":"자격증과 전문성, 부동산과 내 집 마련으로 인정받는 해입니다."):"2026년 남성으로서 "+(myE=="목"||myE=="화"?"사업과 프로젝트, 출시와 창업으로 이름을 알리기 좋은 해입니다.":"승진과 역할, 책임과 조직에서 역할이 커지는 해입니다."))+"<br><br>"+
+      "<b>용신:</b> "+y+"년 "+myDay+"("+myE+")일간 용신 "+(myE=="목"?"금":myE=="화"?"수":myE=="토"?"목":myE=="금"?"화":"토")+"가 오는 대운·해에 기회가 있습니다.<br><br>"+
+      "<b>행운:</b> 색 "+luckyColor+" / 숫자 "+luckyNum+" / 방향 "+luckyDir+" / 시간 "+(myE=="목"?"오전 7~9시":myE=="화"?"오전 11시~오후1시":myE=="토"?"오후 1~3시":myE=="금"?"오후 3~5시":"오후 9~11시")+"<br>"+
+      "<b>음력/양력 행운:</b> "+lunar+" "+mo+"월 "+d+"일생은 "+(lunar=="음력"?"음력 1·6·8일이 행운일이고 전통 음식과 한식이 행운 음식입니다.":"양력 2·5·7일이 행운일이고 새로운 음식과 트렌드 음식이 행운 음식입니다.")+"<br>"+
+      "<b>2026 행운:</b> "+lunar+" "+mo+"월 행운월: "+(lunar=="음력"?((mo+3)%12+1)+"월 (음력 변환)":""+mo+"월")+" / 오늘 행운 아이템: "+(myE=="목"?"나무·식물":myE=="화"?"촛불·조명":myE=="토"?"도자기·가방":myE=="금"?"시계·악세사리":"물·향수");
+    
+    document.getElementById("todayAdvice").innerHTML=
+      "<b>오늘 조언 ("+gender+" "+lunar+" "+myDay+" "+myE+")</b><br>"+
+      (totalScore>=85?"오늘은 총운 "+totalScore+"점으로 최고의 날입니다. 자신감 있게 밀어붙이세요. 계약과 고백, 발표와 제안이 모두 길합니다.":"")+
+      (totalScore>=70&&totalScore<85?"오늘은 총운 "+totalScore+"점으로 좋은 날입니다. 무난하게 진행하면 성과가 있습니다.":"")+
+      (totalScore<70?"오늘은 총운 "+totalScore+"점으로 쉬어가는 날입니다. 무리하지 말고 정리와 휴식, 공부하는 날로 삼으세요.":"")+
+      "<br><br>"+
+      "<b>재물:</b> "+(moneyScore>=80?"재물 "+Math.round(moneyScore)+"점 - 오늘 계약과 투자, 쇼핑이 길합니다.":"재물 "+Math.round(moneyScore)+"점 - 오늘은 지출 관리와 저축하는 날입니다.")+"<br>"+
+      "<b>애정:</b> "+(loveScore>=80?"애정 "+Math.round(loveScore)+"점 - 오늘 고백과 데이트, 만남이 길합니다.":"애정 "+Math.round(loveScore)+"점 - 오늘은 들어주기와 배려하는 날입니다.")+"<br>"+
+      "<b>직장:</b> "+(workScore>=80?"직장 "+Math.round(workScore)+"점 - 오늘 발표와 제안, 시험과 면접이 길합니다.":"직장 "+Math.round(workScore)+"점 - 오늘은 정리와 공부, 준비하는 날입니다.")+"<br>"+
+      "<b>건강:</b> "+(healthScore>=80?"건강 "+Math.round(healthScore)+"점 - 오늘 활력과 운동이 길합니다.":"건강 "+Math.round(healthScore)+"점 - 오늘은 휴식과 따뜻하게 하는 날입니다.");
+  }catch(e){alert("오늘운세 오류:"+e.message);}
+}
+try{var today=new Date();document.getElementById("todayDateText").innerText=today.getFullYear()+"년 "+(today.getMonth()+1)+"월 "+today.getDate()+"일";}catch(e){}
+
+</script>
+</body>
+</html>
