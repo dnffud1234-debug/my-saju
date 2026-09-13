@@ -3,128 +3,114 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>사주팔자 v9.0 - 자녀+시댁궁합</title>
+<title>사주팔자 v10.0 - 고수급 똑똑한 해석</title>
 <meta name="theme-color" content="#8b5a2b">
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR',Arial,sans-serif;background:#fdf8f0;color:#111}
-.card{background:#fff;border:1px solid #e8ddd0;border-radius:18px;padding:16px;margin-bottom:12px;max-width:880px;margin:0 auto 12px auto}
+*{box-sizing:border-box}body{margin:0;font-family:'Noto Sans KR',Arial,sans-serif;background:#fdf8f0;color:#111;line-height:1.7}
+.card{background:#fff;border:1px solid #e8ddd0;border-radius:18px;padding:18px;margin-bottom:14px;max-width:880px;margin:0 auto 14px auto}
 select,input{width:100%;height:50px;font-size:16px;border:2px solid #ddd;border-radius:12px;background:#fff;padding:0 12px}
-.btn{width:100%;height:52px;border:none;border-radius:999px;font-weight:800;font-size:16px;cursor:pointer}
+.btn{width:100%;height:54px;border:none;border-radius:999px;font-weight:900;font-size:16px;cursor:pointer}
 .btn-black{background:#111;color:#fff}
 .btn-gold{background:linear-gradient(135deg,#8b5a2b,#c19a6b);color:#fff}
-.tabbar{display:flex;gap:8px;margin:12px auto;max-width:880px;padding:0 4px}
-.tab{flex:1;height:44px;border-radius:999px;border:1px solid #e8ddd0;background:#fff;font-weight:700;cursor:pointer}
+.tabbar{display:flex;gap:8px;margin:12px auto;max-width:880px;padding:0 4px;overflow-x:auto}
+.tab{flex:1;min-width:90px;height:44px;border-radius:999px;border:1px solid #e8ddd0;background:#fff;font-weight:700;cursor:pointer;white-space:nowrap}
 .tab.active{background:#111;color:#fff;border-color:#111}
 .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
-.pillar{text-align:center;padding:10px 4px;border-radius:12px;background:#fffbf5;border:1px solid #eee}
-.pillar-master{border:2px solid #8b5a2b !important}
-.badge{padding:4px 10px;border-radius:999px;font-size:11px;font-weight:800;background:#fff3e0;color:#8b5a2b}
+.pillar{text-align:center;padding:12px 4px;border-radius:14px;background:#fffbf5;border:1px solid #eee}
+.pillar-master{border:2px solid #8b5a2b !important;background:linear-gradient(180deg,#fff7e6,#fff) !important}
+.badge{padding:5px 12px;border-radius:999px;font-size:11px;font-weight:800;background:#fff3e0;color:#8b5a2b}
 .score-ring{width:130px;height:130px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900;margin:0 auto}
-.tag{padding:6px 10px;border-radius:999px;font-size:11px;font-weight:700;background:#f5efe6;display:inline-block;margin:2px}
+.tag{padding:6px 12px;border-radius:999px;font-size:11px;font-weight:700;background:#f5efe6;display:inline-block;margin:2px}
+.kv{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px dashed #eee;font-size:13px}
+.h2{font-size:16px;font-weight:900;margin:14px 0 8px;display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;border-radius:50%;background:#8b5a2b}
 </style>
 </head>
 <body>
-<div style="max-width:880px;margin:0 auto;padding:12px 12px 90px">
-<h1 style="font-size:24px;margin:8px 0 4px">사주팔자 v9.0 <span class="badge">자녀+시댁궁합 포함</span></h1>
-<p style="font-size:11px;color:#888;margin:0 0 10px">내 사주+이름+궁합+결혼+자녀+시댁+오늘운세. 절대 오류 없음.</p>
+<div style="max-width:880px;margin:0 auto;padding:12px 12px 100px">
+<h1 style="font-size:26px;margin:8px 0 4px;font-weight:900">사주팔자 v10.0 <span class="badge">고수급 똑똑한 해석</span></h1>
+<p style="font-size:11px;color:#888;margin:0 0 10px">신강·신약·격국·용신·월지까지 계산하는 진짜 사주. 이름·궁합·결혼·자녀·시댁·오늘운세 모두 포함.</p>
 
 <div class="tabbar">
-<button class="tab active" data-tab="my">내 사주</button>
+<button class="tab active" data-tab="my">내 사주 정밀</button>
 <button class="tab" data-tab="couple">궁합·결혼·자녀·시댁</button>
-<button class="tab" data-tab="today">오늘운세</button>
+<button class="tab" data-tab="today">오늘·2026운세</button>
 </div>
 
 <!-- MY -->
 <div id="tab-my" class="tab-panel">
 <div class="card">
-<div style="margin-bottom:8px"><label style="font-size:11px">이름</label><input id="my_name" placeholder="예: 지태우"></div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
-<div><select id="year"></select></div><div><select id="month"></select></div><div><select id="day"></select></div>
-</div>
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-<div><select id="hour"></select></div><div><select id="minute"></select></div>
-</div>
-<div style="display:flex;gap:10px;margin-bottom:10px;font-size:13px">
-<label><input type="radio" name="gender" value="여" checked> 여</label>
-<label><input type="radio" name="gender" value="남"> 남</label>
-<label><input type="checkbox" id="timeUnknown"> 시간모름</label>
-</div>
-<button id="calcBtn" class="btn btn-black">내 사주 보기</button>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px"><div><label style="font-size:11px">이름</label><input id="my_name" placeholder="예: 지태우"></div><div><label style="font-size:11px">성별</label><div style="display:flex;gap:8px;height:50px;align-items:center"><label><input type="radio" name="gender" value="여" checked> 여</label><label><input type="radio" name="gender" value="남"> 남</label><label><input type="checkbox" id="timeUnknown"> 시간모름</label></div></div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px"><select id="year"></select><select id="month"></select><select id="day"></select></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px"><select id="hour"></select><select id="minute"></select></div>
+<button id="calcBtn" class="btn btn-black">🔮 고수급 정밀 풀이 보기</button>
 <div id="errorBox" style="display:none;margin-top:8px;padding:10px;background:#ffebee;color:#c00;border-radius:10px;font-size:13px"></div>
 </div>
 <div id="result" style="display:none">
-<div class="card"><div style="display:flex;justify-content:space-between"><h3 style="margin:0">사주 원국</h3><span id="myNameBadge" class="badge"></span></div><div class="grid4" id="pillars" style="margin-top:10px"></div><div id="metaText" style="margin-top:8px;font-size:12px;color:#555"></div><div id="nameAnalysis" style="margin-top:10px;padding:10px;background:#fbf6ee;border-radius:12px;font-size:13px"></div></div>
-<div class="card"><h3>오행·용신·자녀 기본</h3><div id="oheng" style="display:flex;gap:6px;flex-wrap:wrap"></div><div id="yongsin" style="margin-top:8px;font-size:13px"></div><div id="myChildrenBasic" style="margin-top:10px;padding:10px;background:#fff7e6;border-radius:12px;font-size:13px"></div></div>
-<div class="card"><h3>성격·재물·애정·건강</h3><div id="detailText" style="font-size:14px;line-height:1.8"></div></div>
+<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">사주 원국 · 격국 · 신강신약</h3><span id="myNameBadge" class="badge"></span></div><div class="grid4" id="pillars" style="margin-top:12px"></div><div id="metaText" style="margin-top:10px;font-size:12px;color:#555"></div><div id="sinGang" style="margin-top:12px;padding:12px;border-radius:12px;background:#fbf6ee;font-size:13px"></div><div id="gyeokguk" style="margin-top:10px;padding:12px;border-radius:12px;background:#e8f5e9;font-size:13px"></div><div id="nameAnalysis" style="margin-top:10px;padding:10px;background:#fff7e6;border-radius:12px;font-size:13px"></div></div>
+
+<div class="card"><h3>오행·지장간·용신</h3><div id="oheng" style="display:flex;gap:6px;flex-wrap:wrap"></div><div id="balance" style="margin-top:8px;font-size:12px"></div><div id="jijanggan" style="margin-top:10px;font-size:12px"></div><div id="yongsin" style="margin-top:12px;padding:12px;border-radius:12px;background:#e3f2fd;font-size:13px;line-height:1.7"></div></div>
+
+<div class="card"><div class="h2"><span class="dot"></span>성격·천성 (10배 더 똑똑하게)</div><div id="personality" style="font-size:14px;line-height:1.9"></div></div>
+
+<div class="card"><div class="h2"><span class="dot"></span>재물·직업·적성 (월지 중심)</div><div id="wealthJob" style="font-size:14px;line-height:1.9"></div></div>
+
+<div class="card"><div class="h2"><span class="dot"></span>애정·결혼 (배우자 자리 분석)</div><div id="love" style="font-size:14px;line-height:1.9"></div></div>
+
+<div class="card"><div class="h2"><span class="dot"></span>건강·대운 흐름</div><div id="health" style="font-size:14px;line-height:1.9"></div><div id="daewoon" style="display:flex;gap:8px;overflow-x:auto;margin-top:10px;padding-bottom:6px"></div></div>
+
+<div class="card" style="background:#111;color:#fff"><div class="h2" style="color:#ffd89b"><span class="dot" style="background:#ffd89b"></span>고수가 보는 총정리 & 2026년 전략</div><div id="aiFinal" style="font-size:14px;line-height:1.9;color:#f5eedf"></div><div style="margin-top:12px;display:flex;gap:8px"><div style="flex:1;padding:10px;background:rgba(255,255,255,.08);border-radius:12px;text-align:center"><div style="font-size:10px;color:#aaa">행운색</div><div id="luckyColor" style="color:#ffd89b;font-weight:900"></div></div><div style="flex:1;padding:10px;background:rgba(255,255,255,.08);border-radius:12px;text-align:center"><div style="font-size:10px;color:#aaa">숫자</div><div id="luckyNum" style="color:#ffd89b;font-weight:900"></div></div><div style="flex:1;padding:10px;background:rgba(255,255,255,.08);border-radius:12px;text-align:center"><div style="font-size:10px;color:#aaa">방향</div><div id="luckyDir" style="color:#ffd89b;font-weight:900"></div></div></div></div>
 </div>
 </div>
 
 <!-- COUPLE -->
 <div id="tab-couple" class="tab-panel" style="display:none">
 <div class="card">
-<h3 style="margin:0 0 10px">👫 두 사람 + 시댁 정보</h3>
+<h3 style="margin:0 0 10px">👫 두 사람 + 시댁</h3>
 <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-<div>
-<div style="font-weight:800;font-size:13px;margin-bottom:6px">나 (며느리/사위)</div>
-<input id="c1_name" placeholder="내 이름" style="margin-bottom:6px">
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px"><select id="c1_year"></select><select id="c1_month"></select><select id="c1_day"></select></div>
-<div style="display:flex;gap:8px;font-size:12px"><label><input type="radio" name="c1_gender" value="여" checked> 여</label><label><input type="radio" name="c1_gender" value="남"> 남</label></div>
+<div><div style="font-weight:800;font-size:13px">나</div><input id="c1_name" placeholder="내 이름" style="margin-bottom:6px"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px"><select id="c1_year"></select><select id="c1_month"></select><select id="c1_day"></select></div><div style="display:flex;gap:8px;font-size:12px"><label><input type="radio" name="c1_gender" value="여" checked> 여</label><label><input type="radio" name="c1_gender" value="남"> 남</label></div></div>
+<div><div style="font-weight:800;font-size:13px">상대방</div><input id="c2_name" placeholder="상대방 이름" style="margin-bottom:6px"><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px"><select id="c2_year"></select><select id="c2_month"></select><select id="c2_day"></select></div><div style="display:flex;gap:8px;font-size:12px"><label><input type="radio" name="c2_gender" value="여"> 여</label><label><input type="radio" name="c2_gender" value="남" checked> 남</label></div></div>
 </div>
-<div>
-<div style="font-weight:800;font-size:13px;margin-bottom:6px">상대방</div>
-<input id="c2_name" placeholder="상대방 이름" style="margin-bottom:6px">
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px"><select id="c2_year"></select><select id="c2_month"></select><select id="c2_day"></select></div>
-<div style="display:flex;gap:8px;font-size:12px"><label><input type="radio" name="c2_gender" value="여"> 여</label><label><input type="radio" name="c2_gender" value="남" checked> 남</label></div>
+<div style="margin-top:12px;padding:12px;background:#fbf6ee;border-radius:12px"><div style="font-weight:800;font-size:13px;margin-bottom:6px">👩 시어머니 (선택)</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px"><select id="s_year"></select><select id="s_month"></select><select id="s_day"></select></div><input id="s_name" placeholder="시어머니 성함"></div>
+<button id="coupleBtn" class="btn btn-gold" style="margin-top:12px">💕 똑똑한 궁합·결혼·자녀·시댁 보기</button>
 </div>
-</div>
-<div style="margin-top:12px;padding:12px;background:#fbf6ee;border-radius:12px;border:1px dashed #e8ddd0">
-<div style="font-weight:800;font-size:13px;margin-bottom:6px">👩 시어머니/시부모 (선택 - 시댁궁합 보려면 입력)</div>
-<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:6px"><select id="s_year"></select><select id="s_month"></select><select id="s_day"></select></div>
-<input id="s_name" placeholder="시어머니 성함 (예: 김영자, 없으면 비워둬도 됨)" style="height:42px">
-<div style="font-size:11px;color:#888;margin-top:4px">* 시어머니 생일 모르면 년도만 맞춰도 대략 궁합 봐드려요</div>
-</div>
-<button id="coupleBtn" class="btn btn-gold" style="margin-top:12px">💕 궁합 + 결혼 + 자녀 + 시댁궁합 보기</button>
-</div>
-
 <div id="coupleResult" style="display:none">
-<div class="card" style="text-align:center">
-<div id="scoreRing" class="score-ring">0점</div>
-<div id="scoreText" style="margin-top:10px;font-size:15px;font-weight:900"></div>
-<div id="coupleNames" style="margin-top:6px;font-size:13px;color:#8b5a2b;font-weight:800"></div>
-<div id="coupleGanji" style="margin-top:6px;font-size:11px;color:#666"></div>
-</div>
-
-<div class="card"><h3>💞 연애 궁합</h3><div id="coupleDetail" style="font-size:14px;line-height:1.8"></div></div>
-
+<div class="card" style="text-align:center"><div id="scoreRing" class="score-ring">0점</div><div id="scoreText" style="margin-top:10px;font-size:15px;font-weight:900"></div><div id="coupleNames" style="margin-top:6px;font-size:13px;color:#8b5a2b;font-weight:800"></div></div>
+<div class="card"><h3>💞 연애 궁합 - 고수 해석</h3><div id="coupleDetail" style="font-size:14px;line-height:1.9"></div></div>
 <div class="card" style="background:#fff7e6;border:1px solid #ffe0b2"><h3>💍 결혼하면 어떨까?</h3><div id="marriageLife" style="font-size:14px;line-height:1.9"></div></div>
-
-<div class="card" style="background:#e8f5e9;border:1px solid #c8e6c9"><h3>👶 자녀 몇 명? 자녀운 상세</h3><div id="childrenDetail" style="font-size:14px;line-height:1.9"></div></div>
-
-<div class="card" style="background:#f3e5f5;border:1px solid #e1bee7"><h3>👩‍👧 시댁 궁합 (며느리·사위 vs 시어머니)</h3><div id="sidaeDetail" style="font-size:14px;line-height:1.9"></div></div>
-
-<div class="card"><h3>🏠 살림·재물</h3><div id="marriageMoney" style="font-size:13px;line-height:1.8"></div></div>
-
-<div class="card"><h3>⚠️ 잘 사는 법</h3><div id="coupleTip" style="font-size:13px;line-height:1.8"></div></div>
+<div class="card" style="background:#e8f5e9;border:1px solid #c8e6c9"><h3>👶 자녀 몇 명? 언제? 아들딸?</h3><div id="childrenDetail" style="font-size:14px;line-height:1.9"></div></div>
+<div class="card" style="background:#f3e5f5;border:1px solid #e1bee7"><h3>👩‍👧 시댁 궁합</h3><div id="sidaeDetail" style="font-size:14px;line-height:1.9"></div></div>
 </div>
 </div>
 
 <!-- TODAY -->
 <div id="tab-today" class="tab-panel" style="display:none">
 <div class="card">
-<h3>🌞 오늘의 운세</h3>
+<h3>🌞 오늘·2026년 운세 - 똑똑하게</h3>
 <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px"><select id="t_year"></select><select id="t_month"></select><select id="t_day"></select></div>
-<button id="todayBtn" class="btn btn-black">오늘의 운세 보기</button>
-<div style="margin-top:8px;font-size:11px;color:#888">오늘: <span id="todayDateText"></span> / 일진: <span id="todayGanjiText" style="font-weight:800"></span></div>
+<div style="display:flex;gap:8px;margin-bottom:8px"><input id="t_name" placeholder="내 이름" style="flex:1"><input id="t_ilgan" placeholder="일간 자동" readonly style="flex:1;background:#f5f5f5"></div>
+<button id="todayBtn" class="btn btn-black">오늘·2026 운세 똑똑하게 보기</button>
+<div style="margin-top:8px;font-size:11px;color:#888">오늘: <span id="todayDateText"></span> / 일진: <span id="todayGanjiText" style="font-weight:800"></span> / 2026: 병오년</div>
 </div>
-<div id="todayResult" style="display:none"><div class="card"><h3>오늘 총운</h3><div id="todayTotal" style="font-size:14px;line-height:1.8"></div></div></div>
+<div id="todayResult" style="display:none">
+<div class="card"><h3>오늘 총운 - 일간·용신 기준</h3><div id="todayTotal" style="font-size:14px;line-height:1.8"></div></div>
+<div class="card"><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div style="padding:12px;background:#fffbf5;border-radius:12px"><div style="font-size:11px">재물운</div><div id="todayMoney" style="font-weight:900"></div><div id="todayMoneyDesc" style="font-size:12px;margin-top:4px"></div></div>
+<div style="padding:12px;background:#fffbf5;border-radius:12px"><div style="font-size:11px">애정운</div><div id="todayLove" style="font-weight:900"></div><div id="todayLoveDesc" style="font-size:12px;margin-top:4px"></div></div>
+<div style="padding:12px;background:#fffbf5;border-radius:12px"><div style="font-size:11px">직업운</div><div id="todayWork" style="font-weight:900"></div><div id="todayWorkDesc" style="font-size:12px;margin-top:4px"></div></div>
+<div style="padding:12px;background:#fffbf5;border-radius:12px"><div style="font-size:11px">건강운</div><div id="todayHealth" style="font-weight:900"></div><div id="todayHealthDesc" style="font-size:12px;margin-top:4px"></div></div>
+</div></div>
+<div class="card" style="background:#111;color:#fff"><h3 style="color:#ffd89b">2026 병오년 전략</h3><div id="sewoon2026" style="font-size:13px;line-height:1.8;color:#f5eedf"></div><div id="todayAdvice" style="margin-top:10px;font-size:13px;line-height:1.7;color:#f5eedf"></div></div>
+</div>
 </div>
 
 </div>
 
 <script>
 const GAN=["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"], JI=["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"];
-const GAN_INFO={甲:{e:"목"},乙:{e:"목"},丙:{e:"화"},丁:{e:"화"},戊:{e:"토"},己:{e:"토"},庚:{e:"금"},辛:{e:"금"},壬:{e:"수"},癸:{e:"수"}};
-const JI_INFO={子:{e:"수"},丑:{e:"토"},寅:{e:"목"},卯:{e:"목"},辰:{e:"토"},巳:{e:"화"},午:{e:"화"},未:{e:"토"},申:{e:"금"},酉:{e:"금"},戌:{e:"토"},亥:{e:"수"}};
+const GAN_INFO={甲:{e:"목",y:"양",h:"갑",color:"초록",dir:"동",num:"3,8"},乙:{e:"목",y:"음",h:"을",color:"연두",dir:"동",num:"3,8"},丙:{e:"화",y:"양",h:"병",color:"빨강",dir:"남",num:"2,7"},丁:{e:"화",y:"음",h:"정",color:"주황",dir:"남",num:"2,7"},戊:{e:"토",y:"양",h:"무",color:"노랑",dir:"중앙",num:"5,0"},己:{e:"토",y:"음",h:"기",color:"베이지",dir:"중앙",num:"5,0"},庚:{e:"금",y:"양",h:"경",color:"하양",dir:"서",num:"4,9"},辛:{e:"금",y:"음",h:"신",color:"실버",dir:"서",num:"4,9"},壬:{e:"수",y:"양",h:"임",color:"검정",dir:"북",num:"1,6"},癸:{e:"수",y:"음",h:"계",color:"파랑",dir:"북",num:"1,6"}};
+const JI_INFO={子:{e:"수",season:"겨울"},丑:{e:"토",season:"겨울"},寅:{e:"목",season:"봄"},卯:{e:"목",season:"봄"},辰:{e:"토",season:"봄"},巳:{e:"화",season:"여름"},午:{e:"화",season:"여름"},未:{e:"토",season:"여름"},申:{e:"금",season:"가을"},酉:{e:"금",season:"가을"},戌:{e:"토",season:"가을"},亥:{e:"수",season:"겨울"}};
+const JIJANGGAN={子:{main:"癸"},丑:{main:"己",mid:"癸",rem:"辛"},寅:{main:"甲",mid:"丙",rem:"戊"},卯:{main:"乙"},辰:{main:"戊",mid:"乙",rem:"癸"},巳:{main:"丙",mid:"庚",rem:"戊"},午:{main:"丁",mid:"己"},未:{main:"己",mid:"丁",rem:"乙"},申:{main:"庚",mid:"壬",rem:"戊"},酉:{main:"辛"},戌:{main:"戊",mid:"辛",rem:"丁"},亥:{main:"壬",mid:"甲"}};
 const JI_MONTH_MAP={1:"寅",2:"卯",3:"辰",4:"巳",5:"午",6:"未",7:"申",8:"酉",9:"戌",10:"亥",11:"子",12:"丑"};
 function mod(n,m){return ((n%m)+m)%m}
 function getCycle(c){c=mod(c,60);return{gan:GAN[c%10],ji:JI[c%12],cycle:c}}
@@ -132,6 +118,7 @@ function getYearGanJi(y){return getCycle(y-4)}
 function getMonthGanJi(yg,mo){let f=2; if(yg==="甲"||yg==="己")f=2; else if(yg==="乙"||yg==="庚")f=4; else if(yg==="丙"||yg==="辛")f=6; else if(yg==="丁"||yg==="壬")f=8; else if(yg==="戊"||yg==="癸")f=0; return {gan:GAN[mod(f+mo-1,10)], ji:JI_MONTH_MAP[mo]}}
 function getDayGanJi(y,m,d){try{const b=new Date(1900,0,1),c=new Date(y,m-1,d);return getCycle(Math.floor((c-b)/86400000)+10);}catch{return getCycle(y+m+d)}}
 function getMaxDay(y,m){return new Date(y,m,0).getDate()}
+
 function fillYMD(yId,mId,dId, defY){
   const yS=document.getElementById(yId), mS=document.getElementById(mId), dS=document.getElementById(dId);
   for(let y=1920;y<=2035;y++){let o=document.createElement('option');o.value=y;o.textContent=y+'년';if(y===defY)o.selected=true;yS.appendChild(o);}
@@ -150,6 +137,22 @@ document.querySelectorAll('.tab').forEach(btn=>{btn.addEventListener('click',()=
   document.getElementById('tab-'+btn.dataset.tab).style.display='block';
 })});
 
+function getCounts(pillars, timeUnknown){
+  let counts={목:0,화:0,토:0,금:0,수:0};
+  pillars.forEach(p=>{if(p.label==="시주"&&timeUnknown)return; if(p.gan!=="-"){let e=GAN_INFO[p.gan]?.e; if(e)counts[e]++} if(p.ji!=="-"){let e=JI_INFO[p.ji]?.e; if(e)counts[e]++; let jg=JIJANGGAN[p.ji]; if(jg){[jg.main,jg.mid,jg.rem].forEach(g=>{if(g&&GAN_INFO[g]){let e2=GAN_INFO[g].e; counts[e2]+=0.5}})}}});
+  return counts;
+}
+function getSinGang(counts, dayE, monthJi){
+  let monthE=JI_INFO[monthJi]?.e;
+  let same = counts[dayE];
+  let saeng = {목:"수",화:"목",토:"화",금:"토",수:"금"}[dayE];
+  let support = same + (counts[saeng]||0)*0.7;
+  let monthSupport = (monthE===dayE || monthE===saeng) ? 1.5 : 0;
+  support+=monthSupport;
+  let total = Object.values(counts).reduce((a,b)=>a+b,0);
+  return support >= total*0.5 ? "신강" : "신약";
+}
+
 let lastIlgan=null;
 document.getElementById('calcBtn').addEventListener('click',()=>{
   try{
@@ -160,23 +163,108 @@ document.getElementById('calcBtn').addEventListener('click',()=>{
     let yGJ=getYearGanJi(y), mGJ=getMonthGanJi(yGJ.gan,mo), dGJ=getDayGanJi(y,mo,d), tGJ=timeUnknown?{gan:"-",ji:"-"}:(()=>{let idx=h===23||h===0?0:Math.floor((h+1)/2)%12; let f=0; if(dGJ.gan==="甲"||dGJ.gan==="己")f=0; else if(dGJ.gan==="乙"||dGJ.gan==="庚")f=2; else if(dGJ.gan==="丙"||dGJ.gan==="辛")f=4; else if(dGJ.gan==="丁"||dGJ.gan==="壬")f=6; else if(dGJ.gan==="戊"||dGJ.gan==="癸")f=8; return {gan:GAN[mod(f+idx,10)], ji:JI[idx]}})();
     let pillars=[{label:"년주",...yGJ},{label:"월주",...mGJ},{label:"일주",...dGJ,master:true},{label:"시주",...tGJ}];
     lastIlgan=dGJ.gan;
-    document.getElementById('myNameBadge').textContent=name;
-    document.getElementById('pillars').innerHTML=pillars.map(p=>'<div class="pillar'+(p.master?' pillar-master':'')+'"><div style="font-size:10px">'+p.label+'</div><div style="font-weight:900">'+p.gan+'</div><div style="font-weight:900">'+p.ji+'</div></div>').join('');
-    document.getElementById('metaText').textContent=name+' / '+y+'년 '+mo+'월 '+d+'일 '+gender+' / '+pillars.map(p=>p.gan+p.ji).join(' ');
-    let counts={목:0,화:0,토:0,금:0,수:0}; pillars.forEach(p=>{if(p.label==="시주"&&timeUnknown)return; if(p.gan!=="-"){let e=GAN_INFO[p.gan]?.e; if(e)counts[e]++} if(p.ji!=="-"){let e=JI_INFO[p.ji]?.e; if(e)counts[e]++}});
-    document.getElementById('oheng').innerHTML=Object.entries(counts).map(([k,v])=>'<span class="tag">'+k+' '+v+'개</span>').join(' ');
-    document.getElementById('yongsin').textContent='일간 '+lastIlgan+'('+GAN_INFO[lastIlgan].e+') / 가장 많은 오행: '+Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
-    // children basic
-    let childStar = {목:"화",화:"토",토:"금",금:"수",수:"목"}[GAN_INFO[lastIlgan].e];
-    let childCnt = counts[childStar]||0;
-    document.getElementById('myChildrenBasic').innerHTML='<b>👶 내 자녀 기본:</b> 일간 '+lastIlgan+'('+GAN_INFO[lastIlgan].e+')에게 자녀별은 '+childStar+'예요. 원국에 '+childStar+'가 '+childCnt+'개 → '+(childCnt>=2?'자녀 인연이 강한 편, 2명 이상도 가능':'자녀는 1명에 집중하는 게 좋고, 늦게 갖는 게 유리')+'<br><small>* 시주가 자녀궁이라 시간 정확하면 더 정확해요</small>';
-    document.getElementById('nameAnalysis').innerHTML='<b>'+name+'</b> - 일간 '+lastIlgan+'와 함께 보면 좋아요';
-    document.getElementById('detailText').innerHTML=name+'님 일간 '+lastIlgan+' - 성격·재물·애정 상세 풀이 (v9.0)';
+    let dayE=GAN_INFO[lastIlgan].e, monthJi=mGJ.ji;
+    let counts=getCounts(pillars, timeUnknown);
+    let sinGang=getSinGang(counts, dayE, monthJi);
+    let sorted=Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+
+    document.getElementById('myNameBadge').textContent=name+' · '+sinGang;
+    document.getElementById('t_ilgan').value=lastIlgan;
+    document.getElementById('pillars').innerHTML=pillars.map(p=>'<div class="pillar'+(p.master?' pillar-master':'')+'"><div style="font-size:10px;color:#888">'+p.label+'</div><div style="font-size:20px;font-weight:900">'+p.gan+'</div><div style="font-size:20px;font-weight:900">'+p.ji+'</div><div style="font-size:10px;color:#8b5a2b">'+(p.gan!=="-"?GAN_INFO[p.gan].e:'')+'·'+(p.ji!=="-"?JI_INFO[p.ji].e:'')+'</div></div>').join('');
+    document.getElementById('metaText').textContent=name+' / '+y+'년 '+mo+'월 '+d+'일 '+gender+' / '+pillars.map(p=>p.gan+p.ji).join(' ')+' / 월지 '+monthJi+'('+JI_INFO[monthJi].season+')';
+
+    document.getElementById('sinGang').innerHTML='<b>⚖️ 신강/신약: '+sinGang+'</b><br>일간 '+lastIlgan+'('+dayE+')가 월지 '+monthJi+'('+JI_INFO[monthJi].e+')에서 '+(JI_INFO[monthJi].e===dayE?'득령(힘을 얻음)':'실령')+'하고, 사주 전체에서 '+dayE+' 기운이 '+counts[dayE].toFixed(1)+'개로 '+(sinGang==='신강'?'강해요 → 억제·설기가 필요, 강한 추진력·독립심이 장점':'약해요 → 생조가 필요, 협력·배움이 중요, 겸손과 인덕이 장점')+'<br><small>※ 전통 신강신약은 12운성·투출·합충까지 봐야 더 정확해요. 여긴 간편 계산</small>';
+
+    let gyeok = '';
+    if(monthJi==='寅' && dayE==='목') gyeok='건록격 - 스스로 힘이 강해 독립·창업에 유리';
+    else if(monthJi==='午' && dayE==='화') gyeok='건록격 - 태양처럼 빛나는 격, 무대·표현에 강함';
+    else if(sorted[0][0]!==dayE) gyeok=sorted[0][0]+'격 - 월지·최다 오행 '+sorted[0][0]+'이 중심, '+sorted[0][0]+'의 특성을 잘 살리면 성공';
+    else gyeok='신왕격 - 일간이 강한 격, 내 뜻대로 밀고 나가면 성과';
+    document.getElementById('gyeokguk').innerHTML='<b>📜 격국: '+gyeok+'</b><br>격국은 사주의 뼈대예요. 이 격을 살리는 방향으로 가면 길이 열려요.';
+
+    document.getElementById('oheng').innerHTML=Object.entries(counts).map(([k,v])=>'<span class="tag" style="background:'+({목:'#E8F5E9',화:'#FFEBEE',토:'#FFF8E1',금:'#F5F5F5',수:'#E3F2FD'}[k])+';border:1px solid #ddd">'+k+' '+v.toFixed(1)+'개</span>').join(' ');
+    document.getElementById('balance').innerHTML=sorted.map(([k,v])=>k+':'+v.toFixed(1)+'개').join(' | ') + ' → 가장 많은 '+sorted[0][0]+', 가장 적은 '+sorted[sorted.length-1][0];
+    document.getElementById('jijanggan').innerHTML='<b>지장간:</b> '+pillars.filter(p=>p.ji!=="-").map(p=>{let jg=JIJANGGAN[p.ji]; return p.ji+'('+p.label+')='+[jg.main,jg.mid,jg.rem].filter(Boolean).join(',')}).join(' | ');
+
+    let most=sorted[0][0], least=sorted[sorted.length-1][0];
+    let yongsin, heesin;
+    if(sinGang==='신강'){ yongsin={목:"금",화:"토",토:"수",금:"화",수:"목"}[dayE]; heesin={목:"토",화:"금",토:"목",금:"수",수:"화"}[dayE]; }
+    else { yongsin={목:"수",화:"목",토:"화",금:"토",수:"금"}[dayE]; heesin={목:"목",화:"화",토:"토",금:"금",수:"수"}[dayE]; }
+    document.getElementById('yongsin').innerHTML='<b>🧭 용신/희신 (똑똑한 버전)</b><br>신강신약이 '+sinGang+'이므로 <b>용신은 '+yongsin+', 희신은 '+heesin+'</b>이에요.<br>'+(sinGang==='신강'?dayE+'가 강하니 '+yongsin+'(으)로 깎고 다듬고, '+heesin+'(으)로 기운을 빼주면 균형이 맞아요. 억부용신.':'dayE가 약하니 '+yongsin+'(으)로 생해주고, '+heesin+'(으)로 도와주면 힘이 나요. 조후·억부 함께 봐야 해요.')+'<br><br><b>실생활 보완:</b> '+(yongsin==='목'?'초록·동쪽·나무·교육·성장':'')+(yongsin==='화'?'빨강·남쪽·불·표현·무대':'')+(yongsin==='토'?'노랑·중앙·땅·부동산·안정':'')+(yongsin==='금'?'하양·서쪽·금속·결단·법·금융':'')+(yongsin==='수'?'검정·파랑·북쪽·물·지혜·IT':'')+'<br><small>가장 적은 '+least+' 기운도 함께 채우면 좋아요</small>';
+
+    // personality smart
+    const smartPersonality={
+      甲: sinGang==='신강'?'갑목 신강 - 큰 나무가 숲을 이룬 격. 리더십이 강하고, 혼자서도 큰 일을 해내요. 다만 고집이 세서 "내가 맞다"는 생각을 조금만 내려놓으면 100점이에요. 원칙주의자, 정의감이 강해 부당한 걸 못 참아요.':'갑목 신약 - 작은 나무가 큰 숲을 꿈꾸는 격. 이상은 크지만 혼자 하려 하면 지쳐요. 사람·배움·협력(수·목)이 들어오면 크게 성장해요. 섬세하고 배려심이 많아 인기가 많아요.',
+      乙: sinGang==='신강'?'을목 신강 - 덩굴이 기둥을 타고 올라간 격. 유연하지만 끈기가 엄청나요. 한 번 잡으면 놓지 않아요. 예술·기획·상담에서 대성.':'을목 신약 - 풀잎처럼 여리고 섬세. 눈치가 빠르고 적응력이 뛰어나요. 보호자·멘토가 있으면 꽃을 피워요.',
+      丙: sinGang==='신강'?'병화 신강 - 태양이 한낮에 뜬 격. 에너지가 넘쳐요. 무대·방송·리더·영업에서 빛나요. 다만 너무 뜨거우면 주변 사람이 지칠 수 있어요. 물(수)로 식혀주는 사람이 필요해요.':'병화 신약 - 촛불처럼 은은. 따뜻하지만 바람에 흔들려요. 목(나무)이 있으면 불이 안정돼요. 꾸준한 사람이 곁에 있으면 좋아요.',
+      丁: sinGang==='신강'?'정화 신강 - 등대불처럼 강한 격. 연구·전문성·디테일에 강해요. 겉은 조용하지만 속은 뜨거워요.':'정화 신약 - 촛불이 바람에 흔들리는 격. 섬세하고 예민해요. 토·목이 있으면 불이 안정돼요.',
+      戊: sinGang==='신강'?'무토 신강 - 큰 산이 버티는 격. 듬직하고 신뢰가 가요. 중심을 잡아줘요. 다만 고집이 세서 유연성이 필요해요.':'무토 신약 - 밭이 메마른 격. 실속은 있지만 자신감이 부족할 수 있어요. 화·토가 들어오면 든든해져요.',
+      己: sinGang==='신강'?'기토 신강 - 기름진 옥토 격. 실속·재물·운영에 강해요. 꼼꼼하고 현실적이에요.':'기토 신약 - 논밭이 가문 격. 배려심이 많고 인덕이 있어요. 주변 사람이 도와줘요.',
+      庚: sinGang==='신강'?'경금 신강 - 원석·칼날 격. 결단력·추진력·정의감이 강해요. 법·군·금융·기술에서 대성.':'경금 신약 - 보석이 원석인 격. 다듬어지면 빛나요. 화(불)로 단련되면 큰 그릇이 돼요.',
+      辛: sinGang==='신강'?'신금 신강 - 보석이 이미 빛나는 격. 세련·완벽·프라이드가 강해요. 패션·디자인·심사·보석에서 빛나요.':'신금 신약 - 보석이 흙에 묻힌 격. 예민하고 섬세해요. 토가 있으면 보석이 드러나요.',
+      壬: sinGang==='신강'?'임수 신강 - 큰 바다 격. 스케일이 크고 지혜로워요. 무역·IT·기획·컨설팅에서 대성.':'임수 신약 - 시냇물 격. 총명하고 재치가 있어요. 금·수가 들어오면 바다가 돼요.',
+      癸: sinGang==='신강'?'계수 신강 - 빗물이 강을 이룬 격. 직관·전략·비밀기획에 강해요. 조용히 큰 일을 해내요.':'계수 신약 - 이슬방울 격. 섬세하고 비밀스러워요. 금·수가 있으면 총명함이 빛나요.',
+    };
+    document.getElementById('personality').innerHTML=
+      '<b>'+lastIlgan+'('+GAN_INFO[lastIlgan].h+') 일간 '+sinGang+'</b> - '+GAN_INFO[lastIlgan].e+'('+GAN_INFO[lastIlgan].y+')<br><br>'+
+      (smartPersonality[lastIlgan]||'')+'<br><br>'+
+      '<b>강점:</b> '+(sinGang==='신강'?'추진력, 독립심, 리더십, 혼자서도 해내는 힘':'협력, 배려, 섬세함, 인덕, 적응력')+'<br>'+
+      '<b>약점·보완:</b> '+(sinGang==='신강'?'고집·성급함 → 한 박자 쉬어가기, 상대 말 50% 듣기, '+yongsin+' 기운 사람과 함께':'우유부단·걱정 많음 → 결정은 빠르게, '+yongsin+' 기운으로 채우기, 멘토·배움 찾기')+'<br><br>'+
+      '<b>월지 '+monthJi+'('+JI_INFO[monthJi].season+')의 영향:</b> '+(JI_INFO[monthJi].season==='봄'?'봄에 태어나 목·화가 강해 성장·표현이 좋아요.':'')+(JI_INFO[monthJi].season==='여름'?'여름에 태어나 화·토가 강해 열정·안정이 있어요.':'')+(JI_INFO[monthJi].season==='가을'?'가을에 태어나 금·수가 강해 결실·지혜가 있어요.':'')+(JI_INFO[monthJi].season==='겨울'?'겨울에 태어나 수·목이 강해 지혜·포용이 있어요.':'');
+
+    document.getElementById('wealthJob').innerHTML=
+      '<b>재물 구조 ('+sinGang+' 기준):</b><br>'+(sinGang==='신강'?'재성을 극해서 돈을 버는 구조. 내가 강하니 재물(토·금·수)을 쟁취해야 해요. 경쟁·사업·투자에 강해요.':'재성이 나를 도와주는 구조. 내가 약하니 재물(토·금)을 만드는 기술·전문성이 중요해요. 직장·전문직·자격증이 유리.')+'<br><br>'+
+      '<b>직업 적성 - 월지 '+monthJi+' 중심:</b><br>월지가 '+monthJi+'('+JI_INFO[monthJi].e+')라 '+(JI_INFO[monthJi].e==='목'?'교육·스타트업·기획·브랜딩':'')+(JI_INFO[monthJi].e==='화'?'방송·마케팅·요리·연예':'')+(JI_INFO[monthJi].e==='토'?'부동산·운영·관리·금융·유통':'')+(JI_INFO[monthJi].e==='금'?'법·금융·기계·심사·군':'')+(JI_INFO[monthJi].e==='수'?'IT·무역·물류·컨설팅·연구':'')+'에서 능력을 발휘해요. 일간 '+dayE+'와 합치면 '+(dayE==='목'?'성장을 이끄는 일':'')+(dayE==='화'?'빛을 내는 일':'')+(dayE==='토'?'중심을 잡는 일':'')+(dayE==='금'?'결단·완성을 만드는 일':'')+(dayE==='수'?'흐름·지혜를 만드는 일':'')+'이 잘 맞아요.<br><br>'+
+      '<b>재물운 높이는 법:</b> 용신 '+yongsin+' 기운을 직업·색·방향·사람으로 채우세요. '+(yongsin==='목'?'동쪽, 초록, 나무, 교육':'')+(yongsin==='화'?'남쪽, 빨강, 불, 표현':'')+(yongsin==='토'?'중앙, 노랑, 땅, 안정':'')+(yongsin==='금'?'서쪽, 하양, 금속, 금융':'')+(yongsin==='수'?'북쪽, 검정·파랑, 물, IT':'')+'<br><b>대운에서 '+yongsin+'가 오는 10년이 재물 대운!</b>';
+
+    document.getElementById('love').innerHTML=
+      '<b>배우자 자리(일지 '+dGJ.ji+'):</b> 일지가 '+dGJ.ji+'('+JI_INFO[dGJ.ji].e+')라 배우자는 '+(JI_INFO[dGJ.ji].e==='목'?'성장·리더십이 있는 사람':'')+(JI_INFO[dGJ.ji].e==='화'?'밝고 표현력이 좋은 사람':'')+(JI_INFO[dGJ.ji].e==='토'?'안정·신뢰가 가는 사람':'')+(JI_INFO[dGJ.ji].e==='금'?'깔끔·기준이 있는 사람':'')+(JI_INFO[dGJ.ji].e==='수'?'지혜·자유로운 사람':'')+'이 좋아요.<br><br>'+
+      '<b>애정 스타일 ('+sinGang+'):</b> '+(sinGang==='신강'?gender==='여'?'내가 리드하는 연애, 상대가 나를 존중해주면 오래 가요.':'내가 이끌고 싶은 연애, 상대가 따라와주면 좋아요.':'상대에게 맞춰주는 연애, 배려가 강점이지만 내 의견도 50%는 말해야 오래 가요.')+'<br><br>'+
+      '<b>결혼 시기:</b> '+(counts.토>=2?'토가 많아 늦게 갈수록 안정적, 30대 초중반이 좋아요.':'화·수가 조화를 이루는 해, 2026~2028년 병오·정미·무신년에 인연이 강해요.')+'<br><b>배우자 궁합:</b> 용신 '+yongsin+' 기운이 많은 사람과 잘 맞아요. '+(yongsin==='화'?'밝고 따뜻한 사람':'')+(yongsin==='토'?'안정적인 사람':'')+(yongsin==='목'?'성장하는 사람':'')+(yongsin==='금'?'결단력 있는 사람':'')+(yongsin==='수'?'지혜로운 사람':'')+'이 길해요.';
+
+    document.getElementById('health').innerHTML=
+      '<b>건강 - '+dayE+' 일간:</b><br>'+
+      (dayE==='목'?'간·담, 신경계, 어깨 결림. 스트레스 받으면 어깨·목으로 와요. 초록 채소, 산책, 스트레칭이 약':'')+
+      (dayE==='화'?'심장·소장, 눈, 혈액순환. 열이 많고 잠 부족하면 두통·안구건조. 물 많이, 11시 전에 자기':'')+
+      (dayE==='토'?'위·비장, 소화기, 피부. 스트레스 받으면 폭식·소화불량. 규칙적 식사, 따뜻한 음식':'')+
+      (dayE==='금'?'폐·대장, 피부, 호흡기. 건조함에 약해요. 가습기·물·유산소 필수':'')+
+      (dayE==='수'?'신장·방광, 허리, 귀, 호르몬. 추위에 약하고 부종. 따뜻하게, 짠 음식 줄이기, 허리 스트레칭':'')+'<br><br>'+
+      '<b>약한 오행 '+least+' 보완:</b> '+(least==='목'?'간·눈·신경 → 초록 음식, 신맛, 동쪽 산책':'')+(least==='화'?'심장·혈액 → 빨간 과일, 쓴맛, 남쪽 활동':'')+(least==='토'?'소화기·피부 → 노란 곡물, 단맛, 중앙 정리':'')+(least==='금'?'폐·피부 → 흰 음식, 매운맛 조금, 서쪽 정리':'')+(least==='수'?'신장·허리 → 검은콩, 짠맛 줄이기, 북쪽 휴식':'')+'<br><b>대운에서 '+least+'가 오는 해는 건강 관리 더 신경 쓰기</b>';
+
+    // daewoon
+    const daeDiv=document.getElementById('daewoon');
+    daeDiv.innerHTML='';
+    let startAge = (gender==="남" ? (y%2===0?1:2) : (y%2===0?2:1)) + 3;
+    for(let i=0;i<8;i++){
+      let age=startAge + i*10;
+      let cycle=mod(pillars[1].cycle + (i+1)*(gender==="남"?1:-1),60);
+      let gj=getCycle(cycle);
+      let isYongsin = GAN_INFO[gj.gan].e===yongsin || JI_INFO[gj.ji].e===yongsin;
+      let div=document.createElement('div');
+      div.style.cssText='min-width:90px;padding:10px;border-radius:14px;background:'+(isYongsin?'#e8f5e9':'#fffbf5')+';border:2px solid '+(isYongsin?'#4caf50':'#f5eedf')+';text-align:center;flex-shrink:0';
+      div.innerHTML='<div style="font-size:10px;color:#888">'+age+'세~</div><div style="font-weight:900;margin:3px 0">'+gj.gan+gj.ji+'</div><div style="font-size:10px">'+GAN_INFO[gj.gan].e+'·'+JI_INFO[gj.ji].e+(isYongsin?' ⭐용신':'')+'</div>';
+      daeDiv.appendChild(div);
+    }
+
+    document.getElementById('nameAnalysis').innerHTML='<b>📛 '+name+'</b> - 일간 '+lastIlgan+'('+dayE+')와 함께 보면 '+ (dayE===least?'이름이 부족한 '+least+'를 채워주는지 확인 필요':'이름과 사주가 균형')+'<br><small>※ 정식 성명은 81수리·발음오행·자원오행으로 감정</small>';
+
+    document.getElementById('luckyColor').textContent=GAN_INFO[lastIlgan].color+' ('+yongsin+' 보완)';
+    document.getElementById('luckyNum').textContent=GAN_INFO[lastIlgan].num;
+    document.getElementById('luckyDir').textContent=GAN_INFO[lastIlgan].dir+' / 용신 '+yongsin+' 방향 '+(yongsin==='목'?'동':yongsin==='화'?'남':yongsin==='토'?'중앙':yongsin==='금'?'서':'북');
+
+    document.getElementById('aiFinal').innerHTML=
+      '<b>'+name+'님 '+lastIlgan+'('+GAN_INFO[lastIlgan].h+') 일간 '+sinGang+' / '+gyeok+'</b><br><br>'+
+      '당신은 월지 '+monthJi+'('+JI_INFO[monthJi].season+')에 태어나 '+dayE+' 기운이 '+(sinGang==='신강'?'강한':'약한')+' 사주예요. 사주 전체에서 '+sorted.map(([k,v])=>k+v.toFixed(1)).join(', ')+'로 '+most+'가 중심을 잡고 있어요.<br><br>'+
+      '<b>인생 전략 (고수ver):</b> '+sinGang+'이므로 '+(sinGang==='신강'?'강한 기운을 용신 '+yongsin+'(으)로 다스리고, 희신 '+heesin+'(으)로 설기하면 좋아요. 억제·극·설이 핵심. 혼자서도 잘하지만, '+yongsin+' 기운 사람·직업·방향을 쓰면 2배로 커져요.':'약한 기운을 용신 '+yongsin+'(으)로 생하고, 희신 '+heesin+'(으)로 도와야 해요. 생조·협력·배움이 핵심. 혼자 끙끙대지 말고 멘토·팀·배움을 찾으세요.')+'<br><br>'+
+      '<b>2026 병오년 전략:</b> 2026년은 병오(丙午) - 화 기운이 가장 강한 해예요. '+dayE+' 일간에게 '+(dayE==='토'?'화생토로 인성(집·공부·자격)이 들어와요. 내 집 마련·자격증·공부에 좋은 해.':'')+(dayE==='금'?'화극금으로 관성(직업·책임)이 강해요. 승진·역할 커지지만 스트레스도 커요. 건강 챙기기.':'')+(dayE==='목'?'화는 식상(결과물·표현)으로, 그동안 준비한 걸 세상에 보여주는 해. 브랜딩·출시·발표에 좋아요.':'')+(dayE==='수'?'화는 재성(돈)으로, 돈 버는 아이디어가 샘솟는 해. 다만 감정 기복 주의.':'')+(dayE==='화'?'화·화가 만나 비겁이 강해져요. 경쟁 치열하지만 내 이름 알리기 좋은 해. 체력이 핵심.':'')+' 용신 '+yongsin+'가 오는 대운·세운을 잡으세요.<br><br>'+
+      '<span style="font-size:11px;color:#c9b896">* 본 풀이는 전통 사주 원리를 간소화한 고수급 로직으로, 실제 감정시 12운성·신살·합충·투출까지 함께 봐야 더 정확합니다. 참고용으로 활용하세요.</span>';
+
     document.getElementById('result').style.display='block';
-  }catch(e){document.getElementById('errorBox').textContent='오류:'+e.message;document.getElementById('errorBox').style.display='block';}
+    document.getElementById('result').scrollIntoView({behavior:'smooth'});
+  }catch(e){document.getElementById('errorBox').textContent='오류: '+(e.message||e);document.getElementById('errorBox').style.display='block';}
 });
 
-// couple + children + sidae
+// couple (smart version - reuse but smarter text)
 document.getElementById('coupleBtn').addEventListener('click',()=>{
   let y1=+document.getElementById('c1_year').value, m1=+document.getElementById('c1_month').value, d1=+document.getElementById('c1_day').value;
   let y2=+document.getElementById('c2_year').value, m2=+document.getElementById('c2_month').value, d2=+document.getElementById('c2_day').value;
@@ -204,89 +292,83 @@ document.getElementById('coupleBtn').addEventListener('click',()=>{
   score+=hapCnt*8; score-=chungCnt*6;
   score=Math.max(32, Math.min(98, score));
 
-  const ring=document.getElementById('scoreRing');
-  ring.textContent=score+'점'; ring.style.background='conic-gradient(#8b5a2b '+score+'%, #ffe0b2 '+score+'% 100%)';
-  let level=score>=90?'천생연분!':score>=80?'아주 잘 맞아요':score>=70?'잘 맞아요':score>=60?'보통, 노력하면 좋아요':score>=50?'노력이 필요해요':'부딪힘이 있어요';
-  document.getElementById('scoreText').textContent=level;
+  document.getElementById('scoreRing').textContent=score+'점';
+  document.getElementById('scoreRing').style.background='conic-gradient(#8b5a2b '+score+'%, #ffe0b2 '+score+'% 100%)';
   document.getElementById('coupleNames').textContent=n1+'('+ilgan1+') ♥ '+n2+'('+ilgan2+')';
-  document.getElementById('coupleGanji').textContent=n1+': '+p1.map(p=>p.gan+p.ji).join(' ')+' / '+n2+': '+p2.map(p=>p.gan+p.ji).join(' ');
 
-  document.getElementById('coupleDetail').innerHTML='<b>'+n1+' '+ilgan1+'('+e1+') × '+n2+' '+ilgan2+'('+e2+')</b><br>'+(sangsaeng[e1]===e2?'상생 관계 - 함께 성장':'상극이지만 서로 단련')+'<br>합 '+hapCnt+'개, 충 '+chungCnt+'개';
+  let counts1=getCounts(p1, false), counts2=getCounts(p2, false);
+  let sin1=getSinGang(counts1, e1, p1[1].ji), sin2=getSinGang(counts2, e2, p2[1].ji);
+
+  document.getElementById('coupleDetail').innerHTML=
+    '<b>'+n1+' '+ilgan1+'('+e1+' '+sin1+') × '+n2+' '+ilgan2+'('+e2+' '+sin2+')</b><br><br>'+
+    '<b>신강신약 궁합:</b> '+(sin1===sin2? sin1==='신강'?'두 분 다 신강이라 추진력이 강해요. 서로 존중해주면 큰 일을 해내요.':'두 분 다 신약이라 배려심이 많아요. 서로 의지하면 좋아요.' : '한 분은 신강, 한 분은 신약이라 균형이 맞아요. 신강이 리드하고 신약이 서포트하면 천생연분!')+'<br><br>'+
+    '<b>오행 궁합:</b> '+(sangsaeng[e1]===e2?e1+'가 '+e2+'를 생해주는 상생. '+n1+'님이 '+n2+'님을 키워줘요.':sanggeuk[e1]===e2?e1+'가 '+e2+'를 극하는 상극. 부딪히지만 서로 단련시켜 성장해요.':'같은 오행으로 동질감 강함. 서로를 잘 이해해요.')+'<br><br>'+
+    '<b>합 '+hapCnt+'개 충 '+chungCnt+'개:</b> '+(hapCnt>0?'합이 '+hapCnt+'개나 있어 인연이 깊어요. 전생부터 이어진 인연일 수 있어요.':'합은 없지만')+' '+(chungCnt>0?'충이 '+chungCnt+'개 있어 함께 이동·이사·여행이 많아요. 충은 나쁜 게 아니라 변화를 만드는 힘!':'충이 없어 안정적이에요.');
 
   document.getElementById('marriageLife').innerHTML=
-    '<b>🏠 결혼 생활:</b><br>두 분은 '+(score>=80?'배려심이 많아 금방 풀리는 집':'규칙 정해두면 좋은 집')+'<br><br>'+
-    '<b>결혼 후 3년·7년 고비:</b> '+(chungCnt>=2?'충이 많아 이사·직장 변화가 많을 수 있어요. 이사 1~2번 하면 충이 풀려요.':'안정적인 편, 3년 고비만 넘기면 오래가요')+'<br>'+
-    '<b>결혼 시기:</b> 2026~2028년 병오·정미·무신년에 길해요.';
+    '<b>💍 결혼 생활 예측 (신강신약 기준):</b><br>'+
+    (sin1==='신강'&&sin2==='신강'?'두 분 다 신강이라 각자 주장이 강해요. 규칙을 정해두면 좋아요. (예: 집안일·용돈·육아 분담) 서로의 영역을 인정해주면 오래 가요.':'')+
+    (sin1!==sin2?'신강-신약 조합이라 균형이 잘 맞아요. 신강이 밖에서 밀고, 신약이 안에서 다독이면 이상적인 부부!':'')+
+    '<br><br><b>결혼 후 3년·7년:</b> '+(chungCnt>=2?'충이 많아 3년차·7년차에 이사·직장 변화가 올 수 있어요. 이사 1~2번 하면 충이 풀려서 오히려 좋아요.':'안정적인 편, 3년 고비만 넘기면 20년 이상 안정적')+'<br><b>재물 합:</b> 두 분 오행 '+e1+'+'+e2+' → '+(e1==='토'||e2==='토'?'부동산·저축에 강함':'전문성·기술로 버는 구조가 유리');
 
-  // children detailed
-  // For couple, children star is based on woman's chart if one is woman
+  // children smart
   let womanIlgan = (g1==='여'? ilgan1 : (g2==='여'? ilgan2 : ilgan1));
   let womanE = GAN_INFO[womanIlgan].e;
   let childStarE = {목:"화",화:"토",토:"금",금:"수",수:"목"}[womanE];
-  let counts1={목:0,화:0,토:0,금:0,수:0}, counts2={목:0,화:0,토:0,금:0,수:0};
-  p1.forEach(p=>{if(p.gan!=="-"){let e=GAN_INFO[p.gan]?.e; if(e)counts1[e]++} if(p.ji!=="-"){let e=JI_INFO[p.ji]?.e; if(e)counts1[e]++}});
-  p2.forEach(p=>{if(p.gan!=="-"){let e=GAN_INFO[p.gan]?.e; if(e)counts2[e]++} if(p.ji!=="-"){let e=JI_INFO[p.ji]?.e; if(e)counts2[e]++}});
-  let childTotal = (counts1[childStarE]||0) + (counts2[childStarE]||0);
-  let childNum, childGender, childTiming;
-  if(childTotal>=4){ childNum="2~3명 가능"; childGender="첫째 딸 확률 높고, 둘째 아들 가능성"; childTiming="30세 전후 첫째, 33세 전후 둘째가 길"; }
-  else if(childTotal>=2){ childNum="1~2명"; childGender="아들·딸 모두 가능, 첫째는 "+(womanE==='목'||womanE==='화'?'딸':'아들')+" 가능성"; childTiming="결혼 2~3년 후가 좋아요, 급하게 갖지 말고 1~2년 신혼 즐긴 후"; }
-  else { childNum="1명에 집중"; childGender="소중한 1명, 늦게 갖는 게 유리"; childTiming="35세 이전에 갖는 게 좋고, 건강 관리 잘 하면 좋아요"; }
-
+  let childTotal = (counts1[childStarE]||0)+(counts2[childStarE]||0);
+  let childNum = childTotal>=4?'2~3명 가능':childTotal>=2?'1~2명':'1명에 집중';
   document.getElementById('childrenDetail').innerHTML=
-    '<b>👶 자녀 수: '+childNum+'</b><br><br>'+
-    '<b>1. 자녀별(식상) 분석:</b><br>여자 일간 '+womanIlgan+'('+womanE+')에게 자녀별은 '+childStarE+'예요. 두 분 합쳐 '+childStarE+' 기운이 '+childTotal+'개 → '+childNum+'으로 봐요.<br><br>'+
-    '<b>2. 아들·딸:</b><br>'+childGender+'<br><br>'+
-    '<b>3. 언제 가지면 좋을까?</b><br>'+childTiming+'<br>시주가 자녀궁이라 시간까지 정확하면 더 정확해요. 시주에 '+childStarE+'가 있으면 자녀가 부모를 많이 닮아요.<br><br>'+
-    '<b>4. 자녀 교육 스타일:</b><br>'+n1+'님은 '+(e1==='목'?'원칙·독서 강조':'')+(e1==='화'?'칭찬·표현 많이':'')+(e1==='토'?'안정·규칙':'')+(e1==='금'?'기준·예의':'')+(e1==='수'?'자유·창의성':'')+' 교육, '+n2+'님은 '+(e2==='목'?'체험·리더십':'')+(e2==='화'?'예술·자신감':'')+(e2==='토'?'책임·배려':'')+(e2==='금'?'관리·성실':'')+(e2==='수'?'지혜·호기심':'')+' 교육을 선호해요. 두 분이 섞이면 균형 잡힌 아이로 자라요.<br><br>'+
-    '<b>5. 주의할 점:</b> '+(childTotal<=1?'자녀별이 약해 시험관·건강 관리 신경 쓰면 좋아요. 토·금·수 보완 음식이 도움 돼요.':'자녀별이 있어 아이 복이 있어요. 다만 부부가 바빠서 아이와 시간 보내는 게 중요해요.');
+    '<b>👶 자녀: '+childNum+' (여자 일간 '+womanIlgan+' '+womanE+' → 자녀별 '+childStarE+' '+childTotal.toFixed(1)+'개)</b><br><br>'+
+    '<b>신강신약으로 보는 자녀:</b> '+(womanE===childStarE?'여자 일간과 자녀별이 같은 오행이면 자녀가 엄마를 많이 닮아요.':'여자 일간이 약하면 자녀가 생기면 엄마가 더 강해지는 구조예요. 아이가 복이에요.')+'<br><br>'+
+    '<b>자녀 교육:</b> 엄마 '+e1+'는 '+(e1==='목'?'원칙·독서':'')+(e1==='화'?'칭찬·표현':'')+(e1==='토'?'안정·규칙':'')+(e1==='금'?'예의·기준':'')+(e1==='수'?'자유·창의':'')+' 교육, 아빠 '+e2+'는 '+(e2==='목'?'체험·리더십':'')+(e2==='화'?'예술·자신감':'')+(e2==='토'?'책임·배려':'')+(e2==='금'?'관리·성실':'')+(e2==='수'?'지혜·호기심':'')+' 교육이 잘 맞아요.<br><br>'+
+    '<b>시기:</b> '+(childTotal>=3?'30세 전후 첫째, 33세 전후 둘째':'결혼 2~3년 후, 신혼 즐긴 후');
 
-  // sidae compatibility
-  let sScore=60;
-  let targetIlgan = (g1==='여'? ilgan1 : ilgan2); // 며느리/사위 일간
+  // sidae smart
+  let targetIlgan = (g1==='여'? ilgan1 : ilgan2);
   let targetE = GAN_INFO[targetIlgan].e;
+  let sScore=60;
   if(sangsaeng[es]===targetE || sangsaeng[targetE]===es) sScore+=15;
   if(sanggeuk[es]===targetE || sanggeuk[targetE]===es) sScore-=12;
   if(targetE===es) sScore+=5;
-  // check hap/chung between 며느리 and 시어머니
   let jisS=ps.map(p=>p.ji), jisT=(g1==='여'? jis1 : jis2);
   let sHap=0, sChung=0;
   hapPairs.forEach(([a,b])=>{if((jisS.includes(a)&&jisT.includes(b))||(jisS.includes(b)&&jisT.includes(a))) sHap++});
   chungPairs.forEach(([a,b])=>{if((jisS.includes(a)&&jisT.includes(b))||(jisS.includes(b)&&jisT.includes(a))) sChung++});
   sScore+=sHap*10; sScore-=sChung*8;
   sScore=Math.max(30, Math.min(95, sScore));
-
-  let sLevel=sScore>=85?'시댁 궁합 아주 좋음':sScore>=70?'보통, 무난':sScore>=55?'노력 필요, 거리두기 필요':'부딪힘 많음, 독립이 답';
-
   document.getElementById('sidaeDetail').innerHTML=
-    '<b>'+ns+'님('+ilganS+' '+es+') vs '+(g1==='여'?n1:n2)+'님('+targetIlgan+' '+targetE+') : '+sScore+'점 - '+sLevel+'</b><br><br>'+
-    '<b>1. 궁합 점수 '+sScore+'점이 의미하는 것:</b><br>'+(sScore>=80?'시어머니가 며느리를 예뻐하는 궁합이에요. 시어머니가 '+ (es==='토'?'챙겨주고 먹을 걸 많이 주는':'') + (es==='금'?'기준은 있지만 속으로는 챙겨주는':'') + ' 타입이에요.':'시어머니와 성향이 달라 부딪힐 수 있어요. 하지만 이게 나쁜 건 아니고, 거리를 두면 오히려 사이가 좋아요.')+'<br><br>'+
-    '<b>2. 합 '+sHap+'개 / 충 '+sChung+'개:</b><br>'+(sHap>=1?'합이 있어 인연이 깊어요. 시어머니가 며느리를 딸처럼 생각해요.':'합이 없어 독립적인 관계가 편해요.')+' '+(sChung>=1?'충이 있어 같이 살면 부딪혀요. 주말부부·분가가 오히려 궁합에 맞아요.':'충이 없어 같이 살아도 무난해요.')+'<br><br>'+
-    '<b>3. 시댁 잘 지내는 법:</b><br>'+
-    (sScore>=75?
-    '- 시어머니가 좋아하는 건: '+(es==='목'?'칭찬·인정':'')+(es==='화'?'자주 연락·표현':'')+(es==='토'?'음식·선물':'')+(es==='금'?'예의·깔끔':'')+(es==='수'?'들어주기':'')+'<br>- 며느리/사위가 하면 좋은 것: 일주일에 한 번 안부 전화, 명절엔 미리 연락<br>- 같이 살면? '+ (sChung>=1?'가까이 살되 따로 사는 게 좋아요 (걸어서 10분 거리)':'같이 살아도 괜찮아요, 다만 부부만의 시간도 확보하세요')
-    :
-    '- 거리두기가 답: 일주일에 한 번 전화, 한 달에 한 번 방문이 딱 좋아요.<br>- 시어머니와 대화할 땐: '+(es==='토'?'네, 알겠습니다. 잘 챙겨주셔서 감사해요':'')+(es==='금'?'예의 바르게, 깔끔하게':'')+'<br>- 남편/아내 역할이 중요: 중간에서 잘 전달해주기, 두 분 다 편들지 말고 중립<br>- 같이 살면? <b>분가 추천</b>! 같이 살면 싸우고, 떨어져 살면 오히려 사이 좋아요. 명절은 번갈아 가며.'
-    )+'<br><br>'+
-    '<b>4. 시댁 재물·도움:</b><br>'+(sScore>=70?'시댁에서 도움 받을 운이 있어요. 집·육아·자본 도움 가능성.':'시댁 도움보다는 두 부부가 스스로 일어서는 게 궁합에 맞아요. 기대를 낮추면 마음이 편해요.')+'<br><br>'+
-    '<small>※ 시어머니 생년월일 정확히 모르면 년도만으로도 대략 봐요. 정확한 건 시어머니 사주 4개 기둥(년월일시)이 다 있어야 더 정확해요.</small>';
-
-  document.getElementById('marriageMoney').innerHTML='<b>재물 합:</b> '+(e1==='토'||e2==='토'?'토가 있어 부동산 운 좋음':'전문성으로 버는 구조')+'<br><b>살림:</b> 두 분 합쳐 균형 맞춰가세요';
-
-  document.getElementById('coupleTip').innerHTML='<b>오래가는 법:</b> 매일 10분 대화, 한 달에 한 번 데이트, 1년에 한 번 여행. 시댁과는 거리두기, 자녀와는 시간 많이 보내기.';
+    '<b>'+ns+'('+ilganS+' '+es+') vs '+(g1==='여'?n1:n2)+'('+targetIlgan+' '+targetE+') : '+sScore+'점</b><br><br>'+
+    '<b>합 '+sHap+' 충 '+sChung+'개:</b> '+(sHap>=1?'합이 있어 인연 깊음. 시어머니가 딸처럼 예뻐함':'합 없어 독립적 관계가 편함')+' '+(sChung>=1?'충이 있어 같이 살면 부딪힘. 분가·주말부부 추천':'충 없어 같이 살아도 무난')+'<br><br>'+
+    '<b>시댁 잘 지내는 법:</b> '+(sScore>=75?'일주일에 한 번 안부 전화, 명절 미리 연락, '+es+' 기운 좋아하는 것: '+(es==='토'?'음식·선물':es==='화'?'자주 연락':es==='목'?'칭찬':es==='금'?'예의':es==='수'?'들어주기'):'거리두기가 답! 한 달에 한 번 방문, 남편이 중간에서 중립. 같이 살면 싸우고 떨어져 살면 사이 좋아짐');
 
   document.getElementById('coupleResult').style.display='block';
 });
 
-// today
+// today smart
 const today=new Date();
 document.getElementById('todayDateText').textContent=today.getFullYear()+'년 '+(today.getMonth()+1)+'월 '+today.getDate()+'일';
 const todayGJ=getDayGanJi(today.getFullYear(), today.getMonth()+1, today.getDate());
 document.getElementById('todayGanjiText').textContent=todayGJ.gan+todayGJ.ji+'일';
 document.getElementById('todayBtn').addEventListener('click',()=>{
   let y=+document.getElementById('t_year').value, mo=+document.getElementById('t_month').value, d=+document.getElementById('t_day').value;
+  let name=document.getElementById('t_name').value.trim()||'고객님';
   let myDay=getDayGanJi(y,mo,d).gan; if(!myDay){alert('생일 선택');return;}
-  let tGan=todayGJ.gan, tJi=todayGJ.ji, myE=GAN_INFO[myDay].e, tE=GAN_INFO[tGan].e;
-  document.getElementById('todayTotal').innerHTML='오늘 일진 '+tGan+tJi+'일 / 일간 '+myDay+'('+myE+') - 총운 '+(myE===tE? '좋음':'보통');
+  document.getElementById('t_ilgan').value=myDay;
+  let tGan=todayGJ.gan, tJi=todayGJ.ji, myE=GAN_INFO[myDay].e, tE=GAN_INFO[tGan].e, tJiE=JI_INFO[tJi].e;
+  const sangsaeng={목:"화",화:"토",토:"금",금:"수",수:"목"}, sanggeuk={목:"토",화:"금",토:"수",금:"목",수:"화"};
+  let totalScore=60; if(sangsaeng[myE]===tE) totalScore+=15; if(sanggeuk[myE]===tE) totalScore-=10; if(myE===tE) totalScore+=5; if(myE===tJiE) totalScore+=5;
+  totalScore+= (today.getDate()%10)*2; totalScore=Math.max(40, Math.min(95, totalScore));
+  document.getElementById('todayTotal').innerHTML='오늘 일진 <b>'+tGan+tJi+'일('+tE+','+tJiE+')</b> / '+name+'님 일간 '+myDay+'('+myE+') - '+(sangsaeng[myE]===tE?'상생이라 기운 북돋는 날!':'균형 잡힌 날')+' 총운 <b>'+totalScore+'점</b><br>일간 '+myDay+'는 오늘 '+tE+' 기운을 만나 '+(sangsaeng[myE]===tE?'표현·결과물 내기 좋은 날':'정리·계획하기 좋은 날');
+  document.getElementById('todayMoney').textContent=totalScore>75?'💰 좋음':'보통';
+  document.getElementById('todayMoneyDesc').textContent=totalScore>75?'계약·투자·쇼핑':'지출 줄이기·저축';
+  document.getElementById('todayLove').textContent=totalScore>70?'💕 좋음':'보통';
+  document.getElementById('todayLoveDesc').textContent=totalScore>70?'고백·데이트':'들어주는 날';
+  document.getElementById('todayWork').textContent=totalScore>75?'🔥 좋음':'보통';
+  document.getElementById('todayWorkDesc').textContent=totalScore>75?'발표·제안·미팅':'정리·공부';
+  document.getElementById('todayHealth').textContent='양호';
+  document.getElementById('todayHealthDesc').textContent=tJiE==='화'?'물 많이':'따뜻하게';
+  document.getElementById('sewoon2026').innerHTML='2026 병오년(丙午) - 화 기운 최강의 해<br>'+myE+' 일간에게: '+(myE==='목'?'화는 식상(결과물) → 그동안 준비한 거 세상에 보여주는 해, 브랜딩·출시 길':'')+(myE==='화'?'화·화가 만나 비겁 강함 → 경쟁 치열하지만 이름 알리기 좋은 해, 체력 관리 핵심':'')+(myE==='토'?'화생토로 인성(집·공부) 들어옴 → 내 집 마련·자격증·공부에 길':'')+(myE==='금'?'화극금으로 관성(직업·책임) 강함 → 승진·역할 커지지만 스트레스도 커요':'')+(myE==='수'?'화는 재성(돈) → 돈 버는 아이디어 샘솟는 해, 감정 기복 주의':'')+'<br>용신 '+(myE==='목'?'금':myE==='화'?'수':myE==='토'?'목':myE==='금'?'화':'토')+'가 오는 대운·해에 기회 잡으세요.';
+  document.getElementById('todayAdvice').innerHTML=name+'님 오늘 행운: '+(myE==='목'?'초록·동쪽·나무':'')+(myE==='화'?'빨강·남쪽·불':'')+(myE==='토'?'노랑·중앙·땅':'')+(myE==='금'?'하양·서쪽·금속':'')+(myE==='수'?'검정·파랑·북쪽·물':'')+' / '+(totalScore>=80?'밀어붙이는 날! GO!':'꾸준함이 답인 날');
   document.getElementById('todayResult').style.display='block';
 });
 </script>
